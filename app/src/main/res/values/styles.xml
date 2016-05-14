@@ -26,7 +26,7 @@
     <style name="seller_button_takephoto" >
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">16dp</item>
-        <item name="android:fontFamily">sans-serif-medium</item>
+        <!--<item name="android:fontFamily">sans-serif-medium</item>-->
         <item name="android:background">#ECEFF1</item>
         <item name="android:textColor">#BDBDBD</item>
         <item name="android:textAppearance">@android:style/TextAppearance.Large</item>
@@ -37,7 +37,7 @@
         <item name="android:textStyle">bold</item>
 
         <item name="android:textSize">16dp</item>
-        <item name="android:fontFamily">sans-serif-medium</item>
+        <!--<item name="android:fontFamily">sans-serif-medium</item>-->
         <item name="android:background">#009688</item>
         <item name="android:textColor">#FFFFFF</item>
         <item name="android:textAppearance">@android:style/TextAppearance.Large</item>
@@ -46,7 +46,7 @@
     <style name="seller_button_not_next" >
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">16dp</item>
-        <item name="android:fontFamily">sans-serif-medium</item>
+        <!--<item name="android:fontFamily">sans-serif-medium</item>-->
         <item name="android:background">#BDBDBD</item>
         <item name="android:textColor">#FFFFFF</item>
         <item name="android:textAppearance">@android:style/TextAppearance.Large</item>
@@ -55,7 +55,7 @@
     <style name="seller_button_dot" >
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">16dp</item>
-        <item name="android:fontFamily">sans-serif-medium</item>
+        <!--<item name="android:fontFamily">sans-serif-medium</item>-->
         <item name="android:background">#ECEFF1</item>
         <item name="android:textColor">#BDBDBD</item>
         <item name="android:textAppearance">@android:style/TextAppearance.Large</item>
