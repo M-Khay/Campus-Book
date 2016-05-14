@@ -11,52 +11,15 @@
         android:layout_weight="0.1"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:text="Offer a Book"
-        android:id="@+id/textView_seller1_1"
+        android:text="Select Contact Location"
+        android:id="@+id/textView_seller3_1"
         style="@style/seller_textView_heading"
         android:layout_gravity="center_horizontal" />
-
-    <Button
-        style="@style/seller_button_next"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginTop="10dp"
-        android:layout_weight="0.1"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:text="Take Photo"
-        android:id="@+id/button_seller1_7"
-        android:layout_gravity="center_horizontal"/>
-
-    <Button
-        style="@style/seller_button_next"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginTop="10dp"
-        android:layout_weight="0.1"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:text="Select Photo"
-        android:id="@+id/button_seller1_8"
-        android:layout_gravity="center_horizontal"/>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.4"/>
-
-
-    <EditText
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_width="match_parent"
-        android:layout_weight="0.1"
-        android:layout_height="0dp"
-        android:id="@+id/editText_seller2_1"
-        style="@style/seller_textView"
-        android:layout_alignBaseline="@+id/textView_seller1_1"
-        android:text="Name" />
-
+        android:layout_weight="0.7"/>
 
     <Button
         style="@style/seller_button_next"
@@ -67,7 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:text="Next"
-        android:id="@+id/button_seller1_1"
+        android:id="@+id/button_seller3_1"
         android:layout_gravity="center_horizontal"/>
 
     <LinearLayout
@@ -83,12 +46,12 @@
 
 
         <Button
-            style="@style/seller_button_next"
+            style="@style/seller_button_not_next"
             android:layout_weight="0.1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="1"
-            android:id="@+id/button_seller1_2"/>
+            android:id="@+id/button_seller3_2"/>
 
         <Button
             style="@style/seller_button_dot"
@@ -96,7 +59,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="。。。"
-            android:id="@+id/button_seller1_5"/>
+            android:id="@+id/button_seller3_5"/>
 
         <Button
             style="@style/seller_button_not_next"
@@ -104,7 +67,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="2"
-            android:id="@+id/button_seller1_3"/>
+            android:id="@+id/button_seller3_3"/>
 
         <Button
             style="@style/seller_button_dot"
@@ -112,19 +75,21 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="。。。"
-            android:id="@+id/button_seller1_6"/>
+            android:id="@+id/button_seller3_6"/>
 
         <Button
-            style="@style/seller_button_not_next"
+            style="@style/seller_button_next"
             android:layout_weight="0.1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="3"
-            android:id="@+id/button_seller1_4"/>
+            android:id="@+id/button_seller3_4"/>
 
     </LinearLayout>
 
+
 </LinearLayout>
+
 
 
 

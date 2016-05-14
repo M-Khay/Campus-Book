@@ -32,7 +32,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.35"
-        android:weightSum="3"
+        android:weightSum="4"
         android:orientation="vertical">
 
 
@@ -122,17 +122,26 @@
                 android:layout_weight="0.3"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Price"
+                android:text="Contact"
                 android:id="@+id/textView_seller2_7"
                 style="@style/seller_textView"/>
 
-            <EditText
+            <CheckBox
                 android:layout_width="0dp"
-                android:layout_weight="0.7"
                 android:layout_height="wrap_content"
-                android:id="@+id/editText_seller2_8"
-                style="@style/seller_textView"
-                android:text="Price" />
+                android:text="Phone"
+                android:id="@+id/checkBox"
+                android:layout_weight="0.3"
+                android:checked="false" />
+
+            <CheckBox
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Email"
+                android:id="@+id/checkBox2"
+                android:layout_weight="0.3"
+                android:checked="false" />
+
         </LinearLayout>
 
     </LinearLayout>
