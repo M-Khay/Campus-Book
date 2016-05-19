@@ -1,5 +1,6 @@
 package scu.book.campus.com.campusbook;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -16,7 +17,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.landing_page);
 
         Button signup = (Button) findViewById(R.id.button);
-        Button signin = (Button) findViewById(R.id.button2);
 
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -25,12 +25,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        signin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
-        });
     }
 
     @Override
