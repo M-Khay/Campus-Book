@@ -7,10 +7,6 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
 /**
  * Created by kushahuja on 5/13/16.
@@ -25,39 +21,6 @@ public class HomeActivity extends FragmentActivity {
         setContentView(R.layout.home_page);
 
         final ActionBar actionBar = getActionBar();
-
-        // Specify that tabs should be displayed in the action bar.
-//        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-
-        // Create a tab listener that is called when the user changes tabs.
-//        ActionBar.TabListener tabListener = new ActionBar.TabListener() {
-//            @Override
-//            public void onTabSelected(ActionBar.Tab tab, android.app.FragmentTransaction ft) {
-//
-//            }
-//
-//            @Override
-//            public void onTabUnselected(ActionBar.Tab tab, android.app.FragmentTransaction ft) {
-//
-//            }
-//
-//            @Override
-//            public void onTabReselected(ActionBar.Tab tab, android.app.FragmentTransaction ft) {
-//
-//            }
-//
-//
-//        };
-
-        // Add 3 tabs, specifying the tab's text and TabListener
-//        for (int i = 0; i < 3; i++) {
-//            actionBar.addTab(
-//                    actionBar.newTab()
-//                            .setText("Tab " + (i + 1))
-//                            .setTabListener(tabListener));
-//        }
-        // ViewPager and its adapters use support library
-        // fragments, so use getSupportFragmentManager.
         mDemoCollectionPagerAdapter =
                 new DemoCollectionPagerAdapter(
                         getSupportFragmentManager());
@@ -69,9 +32,7 @@ public class HomeActivity extends FragmentActivity {
                 new ViewPager.SimpleOnPageChangeListener() {
                     @Override
                     public void onPageSelected(int position) {
-                        // When swiping between pages, select the
-                        // corresponding tab.
-//                        getActionBar().setSelectedNavigationItem(position);
+
                     }
                 });
 
@@ -87,6 +48,14 @@ class DemoCollectionPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int i) {
+
+        switch (i)
+        {
+            case 0:
+            case 1:
+            case 2:
+
+        }
         Fragment fragment = new DemoObjectFragment();
         Bundle args = new Bundle();
         // Our object is just an integer :-P
@@ -97,11 +66,23 @@ class DemoCollectionPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return 100;
+        return 3;
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
+        switch (position)
+        {
+            case 0:
+                return "Home";
+            case 1:
+                return "Buyer";
+            case 2:
+                return "Seller";
+
+        }
+
+
         return "OBJECT " + (position + 1);
     }
 }
