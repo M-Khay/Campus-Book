@@ -18,7 +18,7 @@ public class  DemoObjectFragment extends Fragment {
         // The last two arguments ensure LayoutParams are inflated
         // properly.
         View rootView = inflater.inflate(
-                R.layout.buyer_1, container, false);
+                R.layout.buyer_page, container, false);
         Bundle args = getArguments();
 //        ((TextView) rootView.findViewById(android.R.id.text1)).setText(
 //                Integer.toString(args.getInt(ARG_OBJECT)));

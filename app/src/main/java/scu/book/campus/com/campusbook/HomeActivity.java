@@ -49,14 +49,20 @@ class DemoCollectionPagerAdapter extends FragmentStatePagerAdapter {
     @Override
     public Fragment getItem(int i) {
 
+        Fragment fragment= null;
+
         switch (i)
         {
             case 0:
+                fragment = new Home();
+                break;
             case 1:
+                fragment = new buyer();
+break;
             case 2:
-
+                fragment = new seller();
+break;
         }
-        Fragment fragment = new DemoObjectFragment();
         Bundle args = new Bundle();
         // Our object is just an integer :-P
         args.putInt(DemoObjectFragment.ARG_OBJECT, i + 1);
