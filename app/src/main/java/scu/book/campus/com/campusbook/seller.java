@@ -13,7 +13,7 @@ import android.widget.LinearLayout;
 /**
  * Created by qizhao on 5/18/16.
  */
-public class seller extends Fragment {
+public class Seller extends Fragment {
 
     @Nullable
     @Override

@@ -13,7 +13,7 @@ import android.widget.LinearLayout;
 /**
  * Created by qizhao on 5/18/16.
  */
-public class buyer extends Fragment {
+public class Buyer extends Fragment {
 //    @Override
 //    protected void onCreate(Bundle savedInstanceState) {
 //        super.onCreate(savedInstanceState);

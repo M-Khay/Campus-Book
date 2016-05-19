@@ -57,10 +57,10 @@ class DemoCollectionPagerAdapter extends FragmentStatePagerAdapter {
                 fragment = new Home();
                 break;
             case 1:
-                fragment = new buyer();
+                fragment = new Buyer();
 break;
             case 2:
-                fragment = new seller();
+                fragment = new Seller();
 break;
         }
         Bundle args = new Bundle();
