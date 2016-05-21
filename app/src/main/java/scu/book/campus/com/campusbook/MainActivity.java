@@ -17,11 +17,18 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.landing_page);
 
         Button signup = (Button) findViewById(R.id.button);
-
+        Button start = (Button) findViewById(R.id.button2);
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, ProfileSignup.class);
+                startActivity(intent);
+            }
+        });
+        start.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, HomeActivity.class);
                 startActivity(intent);
             }
         });
