@@ -13,6 +13,8 @@ import android.support.v4.view.ViewPager;
  */
 public class HomeActivity extends FragmentActivity {
 
+    public static final String ARG_OBJECT = "object";
+
     DemoCollectionPagerAdapter mDemoCollectionPagerAdapter;
     ViewPager mViewPager;
 
@@ -65,7 +67,7 @@ break;
         }
         Bundle args = new Bundle();
         // Our object is just an integer :-P
-        args.putInt(DemoObjectFragment.ARG_OBJECT, i + 1);
+        args.putInt(HomeActivity.ARG_OBJECT, i + 1);
         fragment.setArguments(args);
         return fragment;
     }

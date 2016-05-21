@@ -1,5 +1,6 @@
 package scu.book.campus.com.campusbook;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -15,6 +16,16 @@ public class ProfileSignup extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_signup);
 
+
+        Button signUp = (Button) findViewById(R.id.sign_up);
+
+        signUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent homePage = new Intent(ProfileSignup.this,HomeActivity.class);
+                startActivity(homePage);
+             }
+        });
 
     }
 

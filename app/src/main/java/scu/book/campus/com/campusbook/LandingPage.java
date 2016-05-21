@@ -7,9 +7,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.VideoView;
 
 
-public class MainActivity extends AppCompatActivity {
+public class LandingPage extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,10 +23,11 @@ public class MainActivity extends AppCompatActivity {
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ProfileSignup.class);
+                Intent intent = new Intent(LandingPage.this, ProfileSignup.class);
                 startActivity(intent);
             }
         });
+
 
     }
 
