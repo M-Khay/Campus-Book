@@ -8,6 +8,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 
+import com.kii.cloud.storage.Kii;
+
 /**
  * Created by kushahuja on 5/13/16.
  */
@@ -20,6 +22,7 @@ public class HomeActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_page);
 
+        Kii.initialize("5e6cf58f", "3de2d3d6d860244b7f81698a20e38225", Kii.Site.US);
         final ActionBar actionBar = getActionBar();
         mDemoCollectionPagerAdapter =
                 new DemoCollectionPagerAdapter(

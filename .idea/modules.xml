@@ -2,7 +2,16 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+<<<<<<< Updated upstream
       <module fileurl="file://$PROJECT_DIR$/Project_CampusBook.iml" filepath="$PROJECT_DIR$/Project_CampusBook.iml" />
+=======
+<<<<<<< HEAD
+      <module fileurl="file://$PROJECT_DIR$/Campus-Book.iml" filepath="$PROJECT_DIR$/Campus-Book.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android-cloud-sdk-v2.4.7/android-cloud-sdk-v2.4.7.iml" filepath="$PROJECT_DIR$/android-cloud-sdk-v2.4.7/android-cloud-sdk-v2.4.7.iml" />
+=======
+      <module fileurl="file://$PROJECT_DIR$/Project_CampusBook.iml" filepath="$PROJECT_DIR$/Project_CampusBook.iml" />
+>>>>>>> origin/master
+>>>>>>> Stashed changes
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
