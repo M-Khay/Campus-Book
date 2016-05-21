@@ -16,7 +16,6 @@ public class ProfileSignup extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_signup);
 
-
         Button signUp = (Button) findViewById(R.id.sign_up);
 
         signUp.setOnClickListener(new View.OnClickListener() {
