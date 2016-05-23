@@ -18,10 +18,21 @@ android {
         }
     }
 }
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+    //compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:24.0.0-alpha2'
     compile 'com.android.support:design:23.3.0'
     compile project(':android-cloud-sdk-v2.4.7')
+    compile 'com.example.library:android-cloud-sdk-v2.4.7@aar'
+    compile 'com.squareup.okhttp:okhttp:2.7.2'
+    compile 'com.squareup.okhttp:okhttp-apache:2.7.2'
+    compile files('libs/classes.jar')
+    compile 'com.squareup.okio:okio:1.8.0'
 }

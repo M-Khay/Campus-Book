@@ -8,6 +8,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import com.kii.cloud.storage.Kii;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,6 +17,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.landing_page);
+        Kii.initialize(getApplicationContext(), "\n" +
+                "5e6cf58f", "3de2d3d6d860244b7f81698a20e38225", Kii.Site.US, true);
+
 
         Button signup = (Button) findViewById(R.id.button);
         Button start = (Button) findViewById(R.id.button2);
