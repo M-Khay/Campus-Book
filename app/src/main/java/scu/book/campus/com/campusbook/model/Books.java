@@ -6,15 +6,15 @@ import java.util.List;
  * Created by kushahuja on 5/23/16.
  */
 public class Books {
-    String bookName;
-    String bookPrice;
-    String bookImage;
-    String sellerEmail;
-    String sellerName;
-    String sellerLocation;
-    String isbn;
-    String sellerType;
-    List<String> buyers;
+    public String bookName;
+    public String bookPrice;
+    public String bookImage;
+    public  String sellerEmail;
+    public String sellerName;
+    public String sellerLocation;
+    public String isbn;
+    public String sellerType;
+    public List<String> buyers;
 
 
     public Books(String bookName, String bookPrice, String bookImage, String sellerEmail, String sellerName, String sellerLocation,

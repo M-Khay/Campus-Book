@@ -11,42 +11,72 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.firebase.client.ChildEventListener;
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.Query;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import scu.book.campus.com.campusbook.R;
 import scu.book.campus.com.campusbook.model.Books;
-import scu.book.campus.com.campusbook.model.Image;
 
 /**
  * Created by kushahuja on 5/17/16.
  */
 public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.MyViewHolder> {
-    private List<Books> imageList;
+    private List<Books> booksList;
     Context context;
-//    private MyDB daOdb;
-
+Firebase firebaseRef;
 
     public ImageListAdapter(Context context) {
-        List<Image> imageList = new ArrayList<>();
+        List<Books> booksList = new ArrayList<>();
         this.context = context;
-//        daOdb = new MyDB(context);
-//        for (Image image : daOdb.getNotes()) {
-//            imageList.add(image);
-//        }
+        firebaseRef= new FireBaseAdapter(context).getFirebase();
+
+        firebaseRef.child("Books-Kush2");
+        Query query = firebaseRef.orderByValue();
         Drawable myDrawable = context.getResources().getDrawable(R.drawable.book_cover_1);
         Bitmap myLogo = ((BitmapDrawable) myDrawable).getBitmap();
 
-        imageList.add(new Image("Book1",myLogo));
-        imageList.add(new Image("Book1",myLogo));
-        imageList.add(new Image("Book1",myLogo));
+        booksList.add(new Books("kush","22","333","444","55","333","3233","333"));
+        System.out.println("the data retrived is ");
 
-        this.imageList = imageList;
+        query.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                System.out.println("the data retrived is "+dataSnapshot.child("name").getValue());
+                System.out.println("the data retrived is "+dataSnapshot.child("pic").getValue());
+                System.out.println("the data retrived is "+dataSnapshot.child("name").getValue());
 
-        Toast.makeText(context, "The size of imageList being loaded from database is " + imageList.size(), Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
+        this.booksList = booksList;
+
 
     }
 
@@ -62,42 +92,21 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.MyVi
     @Override
     public void onBindViewHolder(ImageListAdapter.MyViewHolder holder, int position) {
 
-        Image image = imageList.get(position);
-        holder.bookName.setText(image.getDescription());
-        holder.bookPrice.setText(image.getDescription());
+        Books book = booksList.get(position);
+        holder.bookName.setText(book.bookName);
+        holder.bookPrice.setText(book.bookPrice);
 
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inSampleSize = 8; // Experiment with different sizes
-//        Bitmap b = BitmapFactory.decodeFile(image.getImagePath(), options);
-
-//        holder.img_icon.setImageBitmap(b);
     }
 
     @Override
     public int getItemCount() {
 //        Toast.makeText(context, "The new image list size when retyurning to main Activity is " + imageList.size(), Toast.LENGTH_SHORT).show();
-        return imageList.size();
+        return 1;
 
 
     }
-
-//
-//    @Override
-//    public void onItemDismiss(int position) {
-//        imageList.remove(position);
-//
-//        Image image = getImageObjectAtPosition(position);
-////        daOdb.deleteImage(image);
-//        notifyItemRemoved(position);
-//    }
-//
-//    @Override
-//    public boolean onItemMove(int fromPosition, int toPosition) {
-//        Toast.makeText(context, "The size of iamgeList is " + imageList.size(), Toast.LENGTH_SHORT).show();
-//        Collections.swap(imageList, fromPosition, toPosition);
-//        notifyItemMoved(fromPosition, toPosition);
-//        return true;
-//    }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView bookName;
@@ -113,9 +122,9 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.MyVi
         }
     }
 
-    public Image getImageObjectAtPosition(int position) {
+    public Books getImageObjectAtPosition(int position) {
 
-        Image image = imageList.get(position);
+        Books image = booksList.get(position);
         return image;
     }
 
