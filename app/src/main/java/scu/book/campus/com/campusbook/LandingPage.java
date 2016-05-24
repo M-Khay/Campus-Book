@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.VideoView;
 
+import com.firebase.client.Firebase;
+
 
 public class LandingPage extends AppCompatActivity {
 
@@ -17,6 +19,7 @@ public class LandingPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.landing_page);
+        Firebase.setAndroidContext(this);
 
         Button signup = (Button) findViewById(R.id.button);
         Button start = (Button) findViewById(R.id.button2);
