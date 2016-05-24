@@ -18,13 +18,14 @@ import java.util.Collections;
 import java.util.List;
 
 import scu.book.campus.com.campusbook.R;
+import scu.book.campus.com.campusbook.model.Books;
 import scu.book.campus.com.campusbook.model.Image;
 
 /**
  * Created by kushahuja on 5/17/16.
  */
 public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.MyViewHolder> {
-    private List<Image> imageList;
+    private List<Books> imageList;
     Context context;
 //    private MyDB daOdb;
 
