@@ -31,7 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:text="Take Photo"
-            android:id="@+id/button_seller1_7"
+            android:id="@+id/take_photo"
             android:layout_gravity="center_horizontal"/>
 
         <Button
@@ -43,7 +43,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:text="Select Photo"
-            android:id="@+id/button_seller1_8"
+            android:id="@+id/select_photo"
             android:layout_gravity="center_horizontal"/>
 
         <View
@@ -58,7 +58,7 @@
             android:layout_width="match_parent"
             android:layout_weight="0.1"
             android:layout_height="0dp"
-            android:id="@+id/editText_seller2_7"
+            android:id="@+id/seller_name"
             style="@style/seller_textView"
             android:layout_alignBaseline="@+id/textView_seller1_1"
             android:text="Name" />
@@ -183,14 +183,14 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="Name"
-                    android:id="@+id/textView_seller2_1"
+                    android:id="@+id/seller_bookName_t"
                     style="@style/seller_textView"/>
 
                 <EditText
                     android:layout_width="0dp"
                     android:layout_weight="0.7"
                     android:layout_height="wrap_content"
-                    android:id="@+id/editText_seller2_1"
+                    android:id="@+id/sller_bookName_et"
                     style="@style/seller_textView"
                     android:layout_alignBaseline="@+id/textView_seller1_1"
                     android:text="Name" />
@@ -209,14 +209,14 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="ISBN"
-                    android:id="@+id/textView_seller2_2"
+                    android:id="@+id/seller_isbn_t"
                     style="@style/seller_textView"/>
 
                 <EditText
                     android:layout_width="0dp"
                     android:layout_weight="0.7"
                     android:layout_height="wrap_content"
-                    android:id="@+id/editText_seller2_2"
+                    android:id="@+id/seller_isbn_et"
                     android:text="ISBN"
                     style="@style/seller_textView"/>
             </LinearLayout>
@@ -233,14 +233,14 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="Price"
-                    android:id="@+id/textView_seller2_3"
+                    android:id="@+id/seller_price_t"
                     style="@style/seller_textView"/>
 
                 <EditText
                     android:layout_width="0dp"
                     android:layout_weight="0.7"
                     android:layout_height="wrap_content"
-                    android:id="@+id/editText_seller2_3"
+                    android:id="@+id/seller_price_et"
                     style="@style/seller_textView"
                     android:text="Price"
                     />
@@ -258,14 +258,14 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="Contact"
-                    android:id="@+id/textView_seller2_7"
+                    android:id="@+id/seller_contact"
                     style="@style/seller_textView"/>
 
                 <CheckBox
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="Phone"
-                    android:id="@+id/checkBox"
+                    android:id="@+id/seller_phone_checkbox"
                     android:layout_weight="0.3"
                     android:checked="false" />
 
@@ -273,7 +273,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="Email"
-                    android:id="@+id/checkBox2"
+                    android:id="@+id/seller_email_checkbox"
                     android:layout_weight="0.3"
                     android:checked="false" />
 
@@ -381,7 +381,7 @@
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:text="Input Contact Location"
-            android:id="@+id/textView_seller3_1"
+            android:id="@+id/seller_contact_location_t"
             style="@style/seller_textView_heading"
             android:layout_gravity="center_horizontal" />
 
@@ -393,7 +393,7 @@
             android:inputType="textPostalAddress"
             android:ems="10"
             android:layout_gravity="center"
-            android:id="@+id/editText"
+            android:id="@+id/seller_contactlocation_et"
             android:hint="Address" />
 
         <View
