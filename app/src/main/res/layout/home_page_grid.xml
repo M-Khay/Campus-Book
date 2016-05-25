@@ -7,11 +7,12 @@
     android:layout_marginRight="30dp"
     android:layout_marginTop="10dp"
     android:background="#ECEFF1"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:columnCount="2">
     <LinearLayout
         android:layout_gravity="center_horizontal"
         android:background="#FFFFFF"
-        android:layout_width="match_parent"
+        android:layout_width="100dp"
         android:gravity="center_horizontal"
         android:orientation="vertical"
         android:weightSum="1">
@@ -30,16 +31,18 @@
             android:layout_height="0dp"
             android:layout_weight="0.15"
             android:gravity="center_horizontal"
-            android:text="$ 100" />
+            android:text="Book Name"
+            android:singleLine="true"
+            android:ellipsize="end"/>
         <TextView
             android:id="@+id/book_price"
             style="@style/homepage_name_textView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="10dp"
             android:layout_weight="0.15"
-            android:text="Gone with the wind"/>
+            android:gravity="center_horizontal"
+            android:text="$ 100" />
+
     </LinearLayout>
 </GridLayout>
 
