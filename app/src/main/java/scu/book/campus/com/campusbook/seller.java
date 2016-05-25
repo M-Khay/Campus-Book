@@ -1,14 +1,18 @@
 package scu.book.campus.com.campusbook;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.util.Log;
@@ -16,7 +20,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -42,6 +48,7 @@ public class Seller extends Fragment {
     private String isbn_s;
     private String price_s;
     private String location_s;
+    private String type_s;
     Firebase myFirebaseRef;
 
     @Nullable
@@ -58,6 +65,8 @@ public class Seller extends Fragment {
         Button page3Back = (Button) rootView.findViewById(R.id.button7);
         Button takePhoto = (Button) rootView.findViewById(R.id.take_photo);
         Button selectPhoto = (Button) rootView.findViewById(R.id.select_photo);
+        final CheckBox sell = (CheckBox)rootView.findViewById(R.id.seller_sell_checkbox);
+        final CheckBox rent = (CheckBox)rootView.findViewById(R.id.seller_rent_checkbox);
         final EditText name  = (EditText) rootView.findViewById(R.id.seller_name);
         final EditText book_name  = (EditText) rootView.findViewById(R.id.seller_bookName_et);
         final EditText isbn  = (EditText) rootView.findViewById(R.id.seller_isbn_et);
@@ -66,6 +75,7 @@ public class Seller extends Fragment {
         final LinearLayout page1 = (LinearLayout) rootView.findViewById(R.id.seller_page1);
         final LinearLayout page2 = (LinearLayout) rootView.findViewById(R.id.seller_page2);
         final LinearLayout page3 = (LinearLayout) rootView.findViewById(R.id.seller_page3);
+        final ImageView mImg =  (ImageView) rootView.findViewById(R.id.imageView_seller2_1);
 
         page1Next.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,9 +90,13 @@ public class Seller extends Fragment {
                     page1.setVisibility(View.GONE);
                     page2.setVisibility(View.VISIBLE);
                     page3.setVisibility(View.GONE);
-                    convertToBitmap();
+                    Bitmap picView = convertToBitmap();
+
+
+                    mImg.setImageBitmap(picView);
                     new_book.sellerName = name_s;
                     new_book.bookImage = pic;
+
                 }
 
 
@@ -94,12 +108,23 @@ public class Seller extends Fragment {
                 book_name_s = book_name.getText().toString();
                 isbn_s = isbn.getText().toString();
                 price_s = price.getText().toString();
+
+                if (sell.isChecked() && rent.isChecked()) {
+                    type_s = "Sell or rent";
+                } else if(sell.isChecked()) {
+                    type_s = "Sell";
+                } else {
+                    type_s = "rent";
+                }
+
                 if (book_name_s == null || book_name_s.length() == 0){
                     Toast.makeText(getContext(), "Your book name is invalid, please re-enter!", Toast.LENGTH_SHORT).show();
                 } else if (isbn_s == null || isbn_s.length() == 0) {
                     Toast.makeText(getContext(), "Your isbn is invalid, please re-enter!", Toast.LENGTH_SHORT).show();
                 } else if (price_s == null || price_s.length() == 0) {
                     Toast.makeText(getContext(), "Your price is invalid, please re-enter!", Toast.LENGTH_SHORT).show();
+                } else if (!sell.isChecked() && !rent.isChecked()) {
+                    Toast.makeText(getContext(), "Please choose to rent or sell!", Toast.LENGTH_SHORT).show();
                 } else {
                     page1.setVisibility(View.GONE);
                     page2.setVisibility(View.GONE);
@@ -107,6 +132,7 @@ public class Seller extends Fragment {
                     new_book.bookName = book_name_s;
                     new_book.isbn = isbn_s;
                     new_book.bookPrice = price_s;
+                    new_book.sellerType = type_s;
                 }
 
             }
@@ -158,6 +184,7 @@ public class Seller extends Fragment {
             }
         });
 
+
         selectPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -168,6 +195,7 @@ public class Seller extends Fragment {
                 startActivityForResult(galleryIntent, 1);
             }
         });
+
 
 
 
@@ -188,7 +216,31 @@ public class Seller extends Fragment {
         return im;
     }
 
-    private void convertToBitmap(){
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // Here we need to check if the activity that was triggers was the Image Gallery.
+        // If it is the requestCode will match the LOAD_IMAGE_RESULTS value.
+        // If the resultCode is RESULT_OK and there is some data we know that an image was picked.
+        if (requestCode == 1 && data != null) {
+            // Let's read picked image data - its URI
+            Uri pickedImage = data.getData();
+            // Let's read picked image path using content resolver
+            String[] filePath = { MediaStore.Images.Media.DATA };
+            Cursor cursor = getContext().getContentResolver().query(pickedImage, filePath, null, null, null);
+            cursor.moveToFirst();
+            pictureImagePath = cursor.getString(cursor.getColumnIndex(filePath[0]));
+
+            // Now we need to set the GUI ImageView data with data read from the picked file.
+
+
+            // At the end remember to close the cursor or you will end with the RuntimeException!
+            cursor.close();
+        }
+    }
+
+    private Bitmap convertToBitmap(){
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inSampleSize = 8; // Experiment with different sizes
         Bitmap pic_bitmap = BitmapFactory.decodeFile(pictureImagePath, options);
@@ -197,7 +249,10 @@ public class Seller extends Fragment {
         byte[] bytes = baos.toByteArray();
         pic = Base64.encodeToString(bytes, Base64.DEFAULT);
         Log.d("base64", pic);
+        return pic_bitmap;
     }
+
+
 
 
 

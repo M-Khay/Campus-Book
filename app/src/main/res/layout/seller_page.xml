@@ -44,19 +44,20 @@
             android:layout_height="0dp"
             android:text="Select Photo"
             android:id="@+id/select_photo"
-            android:layout_gravity="center_horizontal"/>
+            android:layout_gravity="center_horizontal"
+            android:onClick="select_p"/>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.4"/>
+            android:layout_weight="0.3"/>
 
 
         <EditText
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:layout_width="match_parent"
-            android:layout_weight="0.1"
+            android:layout_weight="0.2"
             android:layout_height="0dp"
             android:id="@+id/seller_name"
             style="@style/seller_textView"
@@ -257,23 +258,23 @@
                     android:layout_weight="0.3"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Contact"
+                    android:text="Selling Type"
                     android:id="@+id/seller_contact"
                     style="@style/seller_textView"/>
 
                 <CheckBox
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Phone"
-                    android:id="@+id/seller_phone_checkbox"
+                    android:text="Sell"
+                    android:id="@+id/seller_sell_checkbox"
                     android:layout_weight="0.3"
                     android:checked="false" />
 
                 <CheckBox
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Email"
-                    android:id="@+id/seller_email_checkbox"
+                    android:text="Rent"
+                    android:id="@+id/seller_rent_checkbox"
                     android:layout_weight="0.3"
                     android:checked="false" />
 
