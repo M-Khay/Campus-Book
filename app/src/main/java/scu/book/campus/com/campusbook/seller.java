@@ -1,6 +1,7 @@
 package scu.book.campus.com.campusbook;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.Image;
@@ -10,6 +11,8 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.util.Log;
@@ -181,6 +184,7 @@ public class Seller extends Fragment {
             }
         });
 
+
         selectPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -191,6 +195,7 @@ public class Seller extends Fragment {
                 startActivityForResult(galleryIntent, 1);
             }
         });
+
 
 
 
@@ -211,6 +216,30 @@ public class Seller extends Fragment {
         return im;
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // Here we need to check if the activity that was triggers was the Image Gallery.
+        // If it is the requestCode will match the LOAD_IMAGE_RESULTS value.
+        // If the resultCode is RESULT_OK and there is some data we know that an image was picked.
+        if (requestCode == 1 && data != null) {
+            // Let's read picked image data - its URI
+            Uri pickedImage = data.getData();
+            // Let's read picked image path using content resolver
+            String[] filePath = { MediaStore.Images.Media.DATA };
+            Cursor cursor = getContext().getContentResolver().query(pickedImage, filePath, null, null, null);
+            cursor.moveToFirst();
+            pictureImagePath = cursor.getString(cursor.getColumnIndex(filePath[0]));
+
+            // Now we need to set the GUI ImageView data with data read from the picked file.
+
+
+            // At the end remember to close the cursor or you will end with the RuntimeException!
+            cursor.close();
+        }
+    }
+
     private Bitmap convertToBitmap(){
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inSampleSize = 8; // Experiment with different sizes
@@ -222,6 +251,8 @@ public class Seller extends Fragment {
         Log.d("base64", pic);
         return pic_bitmap;
     }
+
+
 
 
 
