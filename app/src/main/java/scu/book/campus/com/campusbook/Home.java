@@ -2,6 +2,7 @@ package scu.book.campus.com.campusbook;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,6 +14,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -26,10 +28,12 @@ import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import scu.book.campus.com.campusbook.Constants.SharedData;
 import scu.book.campus.com.campusbook.adapter.FireBaseAdapter;
 import scu.book.campus.com.campusbook.adapter.ImageListAdapter;
 import scu.book.campus.com.campusbook.model.Books;
@@ -52,6 +56,7 @@ public class Home extends Fragment implements View.OnClickListener, TextWatcher 
     Firebase firebaseRef;
     RecyclerView imageListView;
     ImageListAdapter adapter;
+   SharedPreferences myPrefs ;
 
     @Nullable
     @Override
@@ -59,6 +64,7 @@ public class Home extends Fragment implements View.OnClickListener, TextWatcher 
 
         View rootView = inflater.inflate(R.layout.search_page, container, false);
 
+        myPrefs= getContext().getSharedPreferences("myPrefs", getContext().MODE_PRIVATE);
         edtSearch = (EditText) rootView.findViewById(R.id.edt_tags_search);
         edtSearch.setOnClickListener(this);
         edtSearch.addTextChangedListener(this);
@@ -77,17 +83,18 @@ public class Home extends Fragment implements View.OnClickListener, TextWatcher 
             @Override
             public void onClick(View view, int position) {
 
-                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                Gson gson = new Gson();
+                String json = gson.toJson(SharedData.booksList.get(position));
+                Log.d("Book json", json);
 
-                Buyer buyerFragment=  new Buyer();
-                Bundle bundle = new Bundle();
-//                bundle.putParcelable("book", booksList.get(position));
+                SharedPreferences.Editor prefsEditor = myPrefs.edit();
+                prefsEditor.putString("selectedbook", json);
+                prefsEditor.commit();
 
-                buyerFragment.setArguments(bundle);
 
                 mViewPager.setCurrentItem(1);
                 System.out.println("Hello grid item clicked" + position);
+
             }
 
             @Override

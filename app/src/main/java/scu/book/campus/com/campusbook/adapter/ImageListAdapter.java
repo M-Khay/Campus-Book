@@ -24,6 +24,7 @@ import com.firebase.client.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import scu.book.campus.com.campusbook.Constants.SharedData;
 import scu.book.campus.com.campusbook.R;
 import scu.book.campus.com.campusbook.model.Books;
 
@@ -90,6 +91,7 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.MyVi
         });
         this.context = context;
 //        this.booksList= booksList;
+        SharedData.booksList=booksList;
 
     }
 

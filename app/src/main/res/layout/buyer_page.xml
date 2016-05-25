@@ -4,28 +4,14 @@
     android:layout_height="match_parent">
 
 
-    <LinearLayout
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.1"
-        android:weightSum="0.5"
-        android:orientation="horizontal">
 
-
-
-
-    </LinearLayout>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent" android:layout_height="match_parent"
         android:orientation="vertical"
         android:weightSum="1"
         android:background="#ECEFF1"
-        android:visibility="gone"
+android:visibility="gone"
         android:id="@+id/buyer_page1">
 
 
@@ -34,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_gravity="center_horizontal"
-            android:id="@+id/imageView"
+            android:id="@+id/book_image"
             android:background="@drawable/book_cover_1"
             android:layout_weight="0.35"/>
 
@@ -46,7 +32,7 @@
             android:text="Book Name"
             android:layout_gravity="center"
             android:layout_weight="0.15"
-            android:id="@+id/textView" />
+            android:id="@+id/book_name" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -55,7 +41,7 @@
             android:text="Price"
             android:layout_gravity="center"
             android:layout_weight="0.15"
-            android:id="@+id/textView3"
+            android:id="@+id/book_price"
             android:layout_marginTop="10dp" />
 
         <TextView
@@ -65,7 +51,7 @@
             android:text="ISBN"
             android:layout_gravity="center"
             android:layout_weight="0.15"
-            android:id="@+id/textView4" />
+            android:id="@+id/isbn" />
 
         <View
             android:layout_width="match_parent"
@@ -146,7 +132,6 @@
         android:orientation="vertical"
         android:weightSum="1"
         android:background="#ECEFF1"
-        android:visibility="gone"
         android:id="@+id/buyer_page2">
 
 
@@ -155,7 +140,7 @@
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_gravity="center_horizontal"
-            android:id="@+id/imageView1"
+            android:id="@+id/book_image_second_page"
             android:background="@drawable/book_cover_1"
             android:layout_weight="0.40"/>
 
@@ -167,7 +152,7 @@
             android:text="Seller Name"
             android:layout_gravity="center"
             android:layout_weight="0.1"
-            android:id="@+id/textView1" />
+            android:id="@+id/seller_name" />
 
         <TextView
             android:layout_marginTop="10dp"
@@ -177,7 +162,7 @@
             android:text="Email"
             android:layout_gravity="center"
             android:layout_weight="0.1"
-            android:id="@+id/textView5" />
+            android:id="@+id/seller_email" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -186,7 +171,8 @@
             android:text="Phone"
             android:layout_gravity="center"
             android:layout_weight="0.1"
-            android:id="@+id/textView6" />
+            android:visibility="gone"
+            android:id="@+id/seller_phone" />
 
         <View
             android:layout_width="match_parent"
