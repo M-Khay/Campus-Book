@@ -10,6 +10,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import com.firebase.client.ChildEventListener;
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.Query;
+
+import scu.book.campus.com.campusbook.model.Books;
+
 /**
  * Created by qizhao on 5/18/16.
  */
@@ -72,8 +80,46 @@ public class Buyer extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
+        Firebase firebaseRef;
         View rootView = inflater.inflate(
                 R.layout.buyer_page, container, false);
+
+        Firebase.setAndroidContext(getContext());
+        firebaseRef = new Firebase("https://flickering-torch-3960.firebaseio.com/Books");
+
+        System.out.println("Buyer page started");
+
+        Query query = firebaseRef.orderByChild("sellerEmail").equalTo("kkju@gmail.com");
+        query.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+
+                Books books = dataSnapshot.getValue(Books.class);
+
+                System.out.println("book name retrived is " + books.getBookName());
+
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
         Button page1Next = (Button) rootView.findViewById(R.id.button_buyer1_1);
         Button page2Next = (Button) rootView.findViewById(R.id.button_buyer2_1);
         Button page3Next = (Button) rootView.findViewById(R.id.button_buyer3_1);

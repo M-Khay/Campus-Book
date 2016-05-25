@@ -2,6 +2,7 @@ package scu.book.campus.com.campusbook;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -11,6 +12,10 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.firebase.client.Firebase;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,7 +28,7 @@ import scu.book.campus.com.campusbook.model.User;
 /**
  * Created by qizhao on 5/18/16.
  */
-public class ProfileSignup extends AppCompatActivity{
+public class ProfileSignup extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener{
     EditText name;
     EditText email;
     EditText phone;
@@ -31,6 +36,8 @@ public class ProfileSignup extends AppCompatActivity{
     String email_s;
     String phone_s;
     Firebase myFirebaseRef;
+    private GoogleApiClient mGoogleApiClient;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,11 +45,26 @@ public class ProfileSignup extends AppCompatActivity{
         Firebase.setAndroidContext(this);
 
         Button signUp = (Button) findViewById(R.id.sign_up);
+        Button googleSignIn = (Button) findViewById(R.id.sign_in_button);
+
+        googleSignIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
         name = (EditText) findViewById(R.id.input_name);
         email = (EditText) findViewById(R.id.input_email);
         phone = (EditText) findViewById(R.id.input_phone);
 
-
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this , this)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
 
 
         signUp.setOnClickListener(new View.OnClickListener() {
@@ -109,4 +131,8 @@ public class ProfileSignup extends AppCompatActivity{
             return false;
     }
 
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
 }
