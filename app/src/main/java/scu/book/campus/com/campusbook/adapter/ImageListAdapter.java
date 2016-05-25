@@ -6,17 +6,20 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.Query;
+import com.firebase.client.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,30 +31,40 @@ import scu.book.campus.com.campusbook.model.Books;
  * Created by kushahuja on 5/17/16.
  */
 public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.MyViewHolder> {
-    private List<Books> booksList;
+    private List<Books> booksList= new ArrayList<>();
     Context context;
-Firebase firebaseRef;
+    Firebase firebaseRef;
 
     public ImageListAdapter(Context context) {
-        List<Books> booksList = new ArrayList<>();
-        this.context = context;
-        firebaseRef= new FireBaseAdapter(context).getFirebase();
+        Firebase.setAndroidContext(context);
+        firebaseRef = new Firebase("https://flickering-torch-3960.firebaseio.com/Books");
 
-        firebaseRef.child("Books-Kush2");
-        Query query = firebaseRef.orderByValue();
-        Drawable myDrawable = context.getResources().getDrawable(R.drawable.book_cover_1);
-        Bitmap myLogo = ((BitmapDrawable) myDrawable).getBitmap();
+        System.out.println("Image list adapter started");
+//        Firebase booksRefs = firebaseRef.child("Books");
 
-        booksList.add(new Books("kush","22","333","444","55","333","3233","333"));
-        System.out.println("the data retrived is ");
-
-        query.addChildEventListener(new ChildEventListener() {
+//        firebaseRef.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                System.out.println("booklist size under add value " + dataSnapshot.toString());
+//                Books books = dataSnapshot.getValue(Books.class);
+////                booksList.add(books);
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(FirebaseError firebaseError) {
+//
+//            }
+//        });
+        booksList= new ArrayList<>();
+        firebaseRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                System.out.println("the data retrived is "+dataSnapshot.child("name").getValue());
-                System.out.println("the data retrived is "+dataSnapshot.child("pic").getValue());
-                System.out.println("the data retrived is "+dataSnapshot.child("name").getValue());
+                System.out.println("booklist size under chiled added " + booksList.size());
 
+                Books books = dataSnapshot.getValue(Books.class);
+
+                booksList.add(books);
 
             }
 
@@ -75,8 +88,8 @@ Firebase firebaseRef;
 
             }
         });
-        this.booksList = booksList;
-
+        this.context = context;
+//        this.booksList= booksList;
 
     }
 
@@ -98,27 +111,33 @@ Firebase firebaseRef;
 
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inSampleSize = 8; // Experiment with different sizes
+
+        byte[] decodedImage = Base64.decode(book.getBookImage(), Base64.DEFAULT);
+        Bitmap decodedImageByte = BitmapFactory.decodeByteArray(decodedImage, 0, decodedImage.length);
+
+        holder.bookImage.setImageBitmap(decodedImageByte);
+
     }
 
     @Override
     public int getItemCount() {
-//        Toast.makeText(context, "The new image list size when retyurning to main Activity is " + imageList.size(), Toast.LENGTH_SHORT).show();
-        return 1;
+        System.out.println("Booklist size returned  under getItemCount is  "+booksList.size());
 
+        return booksList.size();
 
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView bookName;
         public TextView bookPrice;
-        public ImageView img_icon;
+        public ImageView bookImage;
 
         public MyViewHolder(View itemView) {
             super(itemView);
             bookName = (TextView) itemView.findViewById(R.id.book_name);
             bookPrice= (TextView) itemView.findViewById(R.id.book_price);
 
-            img_icon = (ImageView) itemView.findViewById(R.id.book_img);
+            bookImage = (ImageView) itemView.findViewById(R.id.book_img);
         }
     }
 

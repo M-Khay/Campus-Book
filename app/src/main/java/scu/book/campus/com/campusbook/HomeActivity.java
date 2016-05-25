@@ -65,7 +65,9 @@ class DemoCollectionPagerAdapter extends FragmentStatePagerAdapter {
                 break;
         }
         Bundle args = new Bundle();
+
         // Our object is just an integer :-P
+
         args.putInt(HomeActivity.ARG_OBJECT, i + 1);
         fragment.setArguments(args);
         return fragment;

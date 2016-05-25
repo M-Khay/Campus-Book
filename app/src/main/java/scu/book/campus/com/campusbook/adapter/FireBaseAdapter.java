@@ -10,13 +10,14 @@ import com.firebase.client.Firebase;
 public class FireBaseAdapter {
     public static Firebase myFirebaseRef;
 
-    FireBaseAdapter(Context context){
+    public  FireBaseAdapter(Context context){
         Firebase.setAndroidContext(context);
 
     }
 
     public  Firebase getFirebase() {
         myFirebaseRef = new Firebase("https://flickering-torch-3960.firebaseio.com/");
+
         return myFirebaseRef;
     }
 }
