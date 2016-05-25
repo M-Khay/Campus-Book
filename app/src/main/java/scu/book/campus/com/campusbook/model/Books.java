@@ -31,9 +31,8 @@ public class Books {
         this.sellerType = sellerType;
     }
 
-    private Books() {
+    public Books() {
 
-        return;
     }
 }
 
