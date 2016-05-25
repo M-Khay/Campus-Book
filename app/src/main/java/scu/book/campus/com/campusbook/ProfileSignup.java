@@ -1,6 +1,7 @@
 package scu.book.campus.com.campusbook;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.firebase.client.Firebase;
+import com.google.gson.Gson;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -34,13 +36,20 @@ public class ProfileSignup extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.profile_signup);
-        Firebase.setAndroidContext(this);
+
+        final SharedPreferences myPrefs = this.getSharedPreferences("myPrefs", MODE_PRIVATE);
+
+            setContentView(R.layout.profile_signup);
+            Firebase.setAndroidContext(this);
+
+
 
         Button signUp = (Button) findViewById(R.id.sign_up);
         name = (EditText) findViewById(R.id.input_name);
         email = (EditText) findViewById(R.id.input_email);
         phone = (EditText) findViewById(R.id.input_phone);
+        //Creating a shared preference
+
 
 
 
@@ -71,7 +80,14 @@ public class ProfileSignup extends AppCompatActivity{
                 usersRef.push().setValue(user_temp);*/
 
                     User user_1 = new User(name_s, email_s, phone_s);
+                    user_1.isRegistered = true;
                     usersRef.push().setValue(user_1);
+                    SharedPreferences.Editor prefsEditor = myPrefs.edit();
+                    Gson gson = new Gson();
+                    String json = gson.toJson(user_1);
+                    Log.d("User json", json);
+                    prefsEditor.putString("User", json);
+                    prefsEditor.commit();
 
 
                 /*Firebase alanRef2 = myFirebaseRef.child("Books").child("Book2");
