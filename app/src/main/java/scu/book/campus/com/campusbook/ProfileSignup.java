@@ -56,17 +56,17 @@ public class ProfileSignup extends AppCompatActivity{
                 if (name_s == null || name_s.length() == 0){
                     Toast.makeText(getApplicationContext(), "Your name is invalid, please re-enter!", Toast.LENGTH_SHORT).show();
                 } else if (!isEmailValid(email_s) || email_s == null || email_s.length() == 0){
-                    Toast.makeText(getApplicationContext(),"Your email address is invalid, please re-enter!" , Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Your icon_buyer_email address is invalid, please re-enter!" , Toast.LENGTH_SHORT).show();
 
                 }else {
                     Firebase usersRef = myFirebaseRef.child("Users");
                     //System.out.println(name_s);
                 /*Log.d("name", name_s);
-                Log.d("email", email_s);
+                Log.d("icon_buyer_email", email_s);
                 Log.d("phone", phone_s);
 */              /*Map<String, String> user_temp = new HashMap<String, String>();
                 user_temp.put("name", name_s);
-                user_temp.put("email", email_s);
+                user_temp.put("icon_buyer_email", email_s);
                 user_temp.put("phone", phone_s);
                 usersRef.push().setValue(user_temp);*/
 
