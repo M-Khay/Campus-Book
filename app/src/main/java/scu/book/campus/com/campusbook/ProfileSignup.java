@@ -48,7 +48,7 @@ public class ProfileSignup extends AppCompatActivity implements GoogleApiClient.
         Button signUp = (Button) findViewById(R.id.sign_up);
 
 
-        
+
 
         name = (EditText) findViewById(R.id.input_name);
         email = (EditText) findViewById(R.id.input_email);
