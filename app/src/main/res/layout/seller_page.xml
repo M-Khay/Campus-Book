@@ -190,7 +190,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="0.7"
                     android:layout_height="wrap_content"
-                    android:id="@+id/sller_bookName_et"
+                    android:id="@+id/seller_bookName_et"
                     style="@style/seller_textView"
                     android:layout_alignBaseline="@+id/textView_seller1_1"
                     android:text="Name" />
