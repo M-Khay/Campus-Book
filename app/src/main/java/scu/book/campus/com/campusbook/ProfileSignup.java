@@ -46,14 +46,9 @@ public class ProfileSignup extends AppCompatActivity implements GoogleApiClient.
 
 
         Button signUp = (Button) findViewById(R.id.sign_up);
-        Button googleSignIn = (Button) findViewById(R.id.sign_in_button);
 
-        googleSignIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
-        });
+        
 
         name = (EditText) findViewById(R.id.input_name);
         email = (EditText) findViewById(R.id.input_email);
