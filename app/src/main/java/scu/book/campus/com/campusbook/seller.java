@@ -47,12 +47,13 @@ public class Seller extends Fragment {
     private Uri imageUri;
     private String pictureImagePath = "";
     private String pic;
-    private String name_s;
     private String book_name_s;
     private String isbn_s;
     private String price_s;
     private String location_s;
     private String type_s;
+    private String seller_email;
+    private String seller_phone;
     Firebase myFirebaseRef;
 
     @Nullable
@@ -69,7 +70,7 @@ public class Seller extends Fragment {
         editor.apply();*/
         String json = myPrefs.getString("User", "");
         Log.d("User obj", json);
-        User user_obj = gson.fromJson(json, User.class);
+        final User user_obj = gson.fromJson(json, User.class);
         Button page1Next = (Button) rootView.findViewById(R.id.button_seller1_1);
         Button page2Next = (Button) rootView.findViewById(R.id.button_seller2_1);
         Button page3Next = (Button) rootView.findViewById(R.id.button_seller3_1);
@@ -79,7 +80,6 @@ public class Seller extends Fragment {
         Button selectPhoto = (Button) rootView.findViewById(R.id.select_photo);
         final CheckBox sell = (CheckBox)rootView.findViewById(R.id.seller_sell_checkbox);
         final CheckBox rent = (CheckBox)rootView.findViewById(R.id.seller_rent_checkbox);
-        final EditText name  = (EditText) rootView.findViewById(R.id.seller_name);
         final EditText book_name  = (EditText) rootView.findViewById(R.id.seller_bookName_et);
         final EditText isbn  = (EditText) rootView.findViewById(R.id.seller_isbn_et);
         final EditText price  = (EditText) rootView.findViewById(R.id.seller_price_et);
@@ -92,11 +92,9 @@ public class Seller extends Fragment {
         page1Next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                name_s = name.getText().toString();
-                Log.d("selername", name_s);
-                if (name_s == null || name_s.length() == 0){
-                    Toast.makeText(getContext(), "Your name is invalid, please re-enter!", Toast.LENGTH_SHORT).show();
-                } else if (pictureImagePath == null || pictureImagePath.length()== 0) {
+
+
+                if (pictureImagePath == null || pictureImagePath.length()== 0) {
                     Toast.makeText(getContext(), "Please take or select photo", Toast.LENGTH_SHORT).show();
                 } else {
                     page1.setVisibility(View.GONE);
@@ -106,7 +104,7 @@ public class Seller extends Fragment {
 
 
                     mImg.setImageBitmap(picView);
-                    new_book.sellerName = name_s;
+                    new_book.sellerName = user_obj.name;
                     new_book.bookImage = pic;
 
                 }
@@ -159,6 +157,10 @@ public class Seller extends Fragment {
                 } else {
                     myFirebaseRef = new Firebase("https://flickering-torch-3960.firebaseio.com/");
                     Firebase booksRef = myFirebaseRef.child("Books");
+                    seller_email = user_obj.email;
+                    seller_phone = user_obj.phoneNumber;
+                    new_book.sellerEmail = seller_email;
+                    new_book.sellerPhone = seller_phone;
                     booksRef.push().setValue(new_book);
                 }
             }
