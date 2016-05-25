@@ -5,6 +5,8 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -43,6 +45,8 @@ public class Home extends Fragment implements View.OnClickListener, TextWatcher 
         void onLongClick(View view, int position);
     }
 
+    ViewPager mViewPager;
+
     public EditText edtSearch;
     private List<Books> booksList = new ArrayList<>();
     Firebase firebaseRef;
@@ -60,8 +64,7 @@ public class Home extends Fragment implements View.OnClickListener, TextWatcher 
         edtSearch.addTextChangedListener(this);
 
         imageListView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
-
-
+        mViewPager = (ViewPager) getActivity().findViewById(R.id.pager);
         adapter = new ImageListAdapter(getContext());
         imageListView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
@@ -74,6 +77,16 @@ public class Home extends Fragment implements View.OnClickListener, TextWatcher 
             @Override
             public void onClick(View view, int position) {
 
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+
+                Buyer buyerFragment=  new Buyer();
+                Bundle bundle = new Bundle();
+//                bundle.putParcelable("book", booksList.get(position));
+
+                buyerFragment.setArguments(bundle);
+
+                mViewPager.setCurrentItem(1);
                 System.out.println("Hello grid item clicked" + position);
             }
 

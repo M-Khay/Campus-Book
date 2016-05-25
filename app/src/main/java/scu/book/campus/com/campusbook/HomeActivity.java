@@ -38,6 +38,7 @@ public class HomeActivity extends FragmentActivity {
                     }
                 });
 
+
     }
 }
 // Since this is an object collection, use a FragmentStatePagerAdapter,
@@ -94,5 +95,7 @@ class DemoCollectionPagerAdapter extends FragmentStatePagerAdapter {
 
         return "OBJECT " + (position + 1);
     }
+
+
 }
 

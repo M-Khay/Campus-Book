@@ -46,11 +46,11 @@ public class PreUploadBooks extends AppCompatActivity{
                         "0374118256", "Sell");*/
                 /*Books book_temp = new Books("The Maker of Swans", "10", pic, "819237@hotmail.com", "Chuck Norris", "Santa Clara University",
                         "1474600360", "Rent");*/
-                Books book_temp = new Books("Adaptive Web Design: Crafting Rich Experiences with Progressive Enhancement, Edition 2", "16", pic, "18231@hotmail.com", "Jacky Cheng", "Santa Clara University",
-                        "9780134216201", "Sell");
+//                Books book_temp = new Books("Adaptive Web Design: Crafting Rich Experiences with Progressive Enhancement, Edition 2", "16", pic, "18231@hotmail.com", "Jacky Cheng", "Santa Clara University",
+//                        "9780134216201", "Sell");
 
 
-                bookRef.push().setValue(book_temp);
+//                bookRef.push().setValue(book_temp);
 
             }
         });
