@@ -68,7 +68,7 @@ public class Seller extends Fragment {
         /*SharedPreferences.Editor editor = myPrefs.edit();
         editor.remove("User");
         editor.apply();*/
-        String json = myPrefs.getString("User", "");
+        final String json = myPrefs.getString("User", "");
         Log.d("User obj", json);
         final User user_obj = gson.fromJson(json, User.class);
         Button page1Next = (Button) rootView.findViewById(R.id.button_seller1_1);
@@ -104,7 +104,11 @@ public class Seller extends Fragment {
 
 
                     mImg.setImageBitmap(picView);
-                    new_book.sellerName = user_obj.name;
+
+                    if (json != null && json.length() != 0){
+                        new_book.sellerName = user_obj.name;
+                    }
+
                     new_book.bookImage = pic;
 
                 }
@@ -151,17 +155,34 @@ public class Seller extends Fragment {
         page3Next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                location_s = location.getText().toString();
-                if (location_s == null || location_s.length() == 0){
-                    Toast.makeText(getContext(), "Your book location is invalid, please re-enter!", Toast.LENGTH_SHORT).show();
+                if (json == null || json.length()==0){
+
+                    Intent gotoSignup = new Intent(getActivity(), ProfileSignup.class);
+                    startActivity(gotoSignup);
+                    Toast.makeText(getContext(), "Please Signup first to sell books!", Toast.LENGTH_SHORT).show();
+
+
+
+
                 } else {
-                    myFirebaseRef = new Firebase("https://flickering-torch-3960.firebaseio.com/");
-                    Firebase booksRef = myFirebaseRef.child("Books");
-                    seller_email = user_obj.email;
-                    seller_phone = user_obj.phoneNumber;
-                    new_book.sellerEmail = seller_email;
-                    new_book.sellerPhone = seller_phone;
-                    booksRef.push().setValue(new_book);
+                    location_s = location.getText().toString();
+                    if (location_s == null || location_s.length() == 0){
+                        Toast.makeText(getContext(), "Your book location is invalid, please re-enter!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        myFirebaseRef = new Firebase("https://flickering-torch-3960.firebaseio.com/");
+                        Firebase booksRef = myFirebaseRef.child("Books");
+                        if (json != null && json.length() != 0) {
+                            seller_phone = user_obj.phoneNumber;
+                            new_book.sellerPhone = seller_phone;
+                            seller_email = user_obj.email;
+                            new_book.sellerEmail = seller_email;
+                        }
+
+
+
+                        booksRef.push().setValue(new_book);
+                }
+
                 }
             }
         });
