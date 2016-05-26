@@ -91,9 +91,12 @@ public class Home extends Fragment implements View.OnClickListener, TextWatcher 
                 prefsEditor.putString("selectedbook", json);
                 prefsEditor.commit();
 
+                Buyer.bookSelected= true;
 
                 mViewPager.setCurrentItem(1);
                 System.out.println("Hello grid item clicked" + position);
+
+
 
             }
 

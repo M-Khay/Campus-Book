@@ -34,6 +34,17 @@ public class Buyer extends Fragment {
     public static boolean bookSelected = false;
     Books bookObj;
 
+    ImageView bookImage;
+    TextView bookName ;
+    TextView bookPrice;
+    TextView isbn ;
+
+    ImageView bookImageSecondPage ;
+    TextView sellerName ;
+    TextView sellerEmail ;
+    TextView sellerPhone ;
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -84,36 +95,22 @@ public class Buyer extends Fragment {
         Button page3Next = (Button) rootView.findViewById(R.id.button_buyer3_1);
         Button page2Back = (Button) rootView.findViewById(R.id.button5);
         Button page3Back = (Button) rootView.findViewById(R.id.button6);
-        final ImageView bookImage = (ImageView) rootView.findViewById(R.id.book_image);
-        TextView bookName = (TextView) rootView.findViewById(R.id.book_name);
-        TextView bookPrice = (TextView) rootView.findViewById(R.id.book_price);
-        TextView isbn = (TextView) rootView.findViewById(R.id.isbn);
+        bookImage = (ImageView) rootView.findViewById(R.id.book_image);
+        bookName = (TextView) rootView.findViewById(R.id.book_name);
+        bookPrice = (TextView) rootView.findViewById(R.id.book_price);
+        isbn = (TextView) rootView.findViewById(R.id.isbn);
 
-        final ImageView bookImageSecondPage = (ImageView) rootView.findViewById(R.id.book_image_second_page);
-        final TextView sellerName = (TextView) rootView.findViewById(R.id.seller_name);
-        final TextView sellerEmail = (TextView) rootView.findViewById(R.id.seller_email);
-        final TextView sellerPhone = (TextView) rootView.findViewById(R.id.seller_phone);
+        bookImageSecondPage = (ImageView) rootView.findViewById(R.id.book_image_second_page);
+        sellerName = (TextView) rootView.findViewById(R.id.seller_name);
+        sellerEmail = (TextView) rootView.findViewById(R.id.seller_email);
+        sellerPhone = (TextView) rootView.findViewById(R.id.seller_phone);
 
         final LinearLayout page1 = (LinearLayout) rootView.findViewById(R.id.buyer_page1);
         final LinearLayout page2 = (LinearLayout) rootView.findViewById(R.id.buyer_page2);
         final LinearLayout page3 = (LinearLayout) rootView.findViewById(R.id.buyer_page3);
 
 //        final SharedPreferences myPrefs = getContext().getSharedPreferences("myPrefs", getContext().MODE_PRIVATE);
-        if (bookSelected == true) {
-            SharedPreferences myPrefs = getContext().getSharedPreferences("myPrefs", getContext().MODE_PRIVATE);
-            String json = myPrefs.getString("selectedbook", "");
-            Log.d("Book obj", json);
-            Gson gson = new Gson();
-            bookObj = gson.fromJson(json, Books.class);
-            if (json != null || json != "")
-                bookName.setText(bookObj.getBookName());
-            bookPrice.setText(bookObj.getBookPrice());
 
-            Bitmap bookImageBitmap = SharedData.getDecodedImageFromString(bookObj.getBookImage());
-            bookImage.setImageBitmap(bookImageBitmap);
-
-
-        }
         page1Next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -157,5 +154,87 @@ public class Buyer extends Fragment {
             }
         });
         return rootView;
+    }
+
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+            System.out.println("Buyer page fragment visible onHIddenChanged "+hidden);
+        if(!hidden){
+
+            if (bookSelected == true) {
+                SharedPreferences myPrefs = getContext().getSharedPreferences("myPrefs", getContext().MODE_PRIVATE);
+                String json = myPrefs.getString("selectedbook", "");
+                Log.d("Book obj", json);
+                Gson gson = new Gson();
+                bookObj = gson.fromJson(json, Books.class);
+                if (json != null || json != "")
+                    bookName.setText(bookObj.getBookName());
+                bookPrice.setText(bookObj.getBookPrice());
+
+                Bitmap bookImageBitmap = SharedData.getDecodedImageFromString(bookObj.getBookImage());
+                bookImage.setImageBitmap(bookImageBitmap);
+
+
+            }
+
+        }
+    }
+
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        Log.d("Book obj", "SetUserVisibliitHint "+isVisibleToUser+" is book selected"+bookSelected);
+
+        if(isVisibleToUser){
+            if (bookSelected == true) {
+                SharedPreferences myPrefs = getContext().getSharedPreferences("myPrefs", getContext().MODE_PRIVATE);
+                String json = myPrefs.getString("selectedbook", "");
+                Log.d("Book obj", json);
+                Gson gson = new Gson();
+                bookObj = gson.fromJson(json, Books.class);
+                if (json != null || json != "")
+                    bookName.setText(bookObj.getBookName());
+                bookPrice.setText(bookObj.getBookPrice());
+
+                Bitmap bookImageBitmap = SharedData.getDecodedImageFromString(bookObj.getBookImage());
+                bookImage.setImageBitmap(bookImageBitmap);
+
+
+            }
+        }
+    }
+
+    @Override
+    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+
+        System.out.println("Buyer page fragment visible  OnResume");
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        System.out.println("Buyer page fragment visible  OnResume"+bookSelected);
+
+        if (bookSelected == true) {
+            SharedPreferences myPrefs = getContext().getSharedPreferences("myPrefs", getContext().MODE_PRIVATE);
+            String json = myPrefs.getString("selectedbook", "");
+            Log.d("Book obj", json);
+            Gson gson = new Gson();
+            bookObj = gson.fromJson(json, Books.class);
+            if (json != null || json != "")
+                bookName.setText(bookObj.getBookName());
+            bookPrice.setText(bookObj.getBookPrice());
+
+            Bitmap bookImageBitmap = SharedData.getDecodedImageFromString(bookObj.getBookImage());
+            bookImage.setImageBitmap(bookImageBitmap);
+
+
+        }
+
     }
 }
