@@ -8,6 +8,30 @@
         android:orientation="vertical"
         android:weightSum="1"
         android:background="#ECEFF1"
+        android:id="@+id/seller_page_sold"
+        android:visibility="gone">
+
+
+        <TextView
+            android:layout_marginTop="150dp"
+            android:layout_weight="0.1"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:text="Your book is posted! Please check for you email or check the buyer page to see if someone wants to buy your book! Swipe to go to home page"
+            android:id="@+id/textView_seller_sold_text"
+            style="@style/seller_textView_heading"
+            android:layout_gravity="center"
+            android:gravity="center"
+            />
+
+
+    </LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent" android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="1"
+        android:background="#ECEFF1"
         android:visibility="visible"
         android:id="@+id/seller_page1">
 

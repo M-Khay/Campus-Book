@@ -87,6 +87,7 @@ public class Seller extends Fragment {
         final LinearLayout page1 = (LinearLayout) rootView.findViewById(R.id.seller_page1);
         final LinearLayout page2 = (LinearLayout) rootView.findViewById(R.id.seller_page2);
         final LinearLayout page3 = (LinearLayout) rootView.findViewById(R.id.seller_page3);
+        final LinearLayout soldPage = (LinearLayout) rootView.findViewById(R.id.seller_page_sold);
         final ImageView mImg =  (ImageView) rootView.findViewById(R.id.imageView_seller2_1);
 
         page1Next.setOnClickListener(new View.OnClickListener() {
@@ -181,6 +182,8 @@ public class Seller extends Fragment {
 
 
                         booksRef.push().setValue(new_book);
+                        page3.setVisibility(View.GONE);
+                        soldPage.setVisibility(View.VISIBLE);
                 }
 
                 }

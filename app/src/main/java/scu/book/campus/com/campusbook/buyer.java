@@ -105,7 +105,7 @@ public class Buyer extends Fragment {
             Log.d("Book obj", json);
             Gson gson = new Gson();
             bookObj = gson.fromJson(json, Books.class);
-            if (json != null || json != "")
+            if (json != null && json != "")
                 bookName.setText(bookObj.getBookName());
             bookPrice.setText(bookObj.getBookPrice());
 
