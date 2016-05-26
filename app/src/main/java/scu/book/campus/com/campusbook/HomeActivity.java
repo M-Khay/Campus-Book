@@ -96,6 +96,9 @@ class DemoCollectionPagerAdapter extends FragmentStatePagerAdapter {
         return "OBJECT " + (position + 1);
     }
 
-
+    @Override
+    public int getItemPosition(Object object) {
+        return POSITION_NONE;
+    }
 }
 

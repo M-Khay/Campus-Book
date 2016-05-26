@@ -273,7 +273,7 @@
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_gravity="center_horizontal"
-            android:id="@+id/imageView3"
+            android:id="@+id/book_image_third_page"
             android:background="@drawable/book_cover_1"
             android:layout_weight="0.35"/>
 
@@ -373,6 +373,30 @@
                 android:id="@+id/button_buyer3_6"/>
 
         </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent" android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="1"
+        android:background="#ECEFF1"
+        android:id="@+id/seller_page_sold"
+        android:visibility="gone">
+
+
+        <TextView
+            android:layout_marginTop="150dp"
+            android:layout_weight="0.1"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:text="The buyer will be notified with your contact details, and he will contact you shortly."
+            android:id="@+id/textView_seller_sold_text"
+            style="@style/seller_textView_heading"
+            android:layout_gravity="center"
+            android:gravity="center"
+            />
+
 
     </LinearLayout>
 

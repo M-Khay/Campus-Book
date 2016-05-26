@@ -129,6 +129,7 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.MyVi
 
     }
 
+
     class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView bookName;
         public TextView bookPrice;

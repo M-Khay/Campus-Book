@@ -1,17 +1,14 @@
 package scu.book.campus.com.campusbook;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -22,12 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
-import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
-import com.firebase.client.ChildEventListener;
-import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
-import com.firebase.client.FirebaseError;
-import com.firebase.client.ValueEventListener;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -76,7 +68,7 @@ public class Home extends Fragment implements View.OnClickListener, TextWatcher 
         adapter.notifyDataSetChanged();
         System.out.println("Book name is " + adapter.getItemCount());
 
-        RecyclerView.LayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 1);
+        RecyclerView.LayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
         imageListView.setLayoutManager(gridLayoutManager);
         imageListView.setItemAnimator(new DefaultItemAnimator());
         imageListView.addOnItemTouchListener(new RecyclerTouchListener(getContext(), imageListView, new ClickListener() {
