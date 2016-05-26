@@ -10,13 +10,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+
 import com.firebase.client.Firebase;
 import com.google.gson.Gson;
 
 import scu.book.campus.com.campusbook.model.User;
 
 
-public class LandingPage extends AppCompatActivity  {
+public class LandingPage extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -1,6 +1,8 @@
 package scu.book.campus.com.campusbook;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -27,6 +29,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.firebase.client.Firebase;
+import com.google.gson.Gson;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -35,6 +38,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import scu.book.campus.com.campusbook.model.Books;
+import scu.book.campus.com.campusbook.model.User;
 
 /**
  * Created by qizhao on 5/18/16.
@@ -58,6 +62,14 @@ public class Seller extends Fragment {
         View rootView = inflater.inflate(
                 R.layout.seller_page, container, false);
         final Books new_book = new Books();
+        Gson gson = new Gson();
+        SharedPreferences myPrefs = this.getActivity().getSharedPreferences("myPrefs", Context.MODE_PRIVATE);
+        /*SharedPreferences.Editor editor = myPrefs.edit();
+        editor.remove("User");
+        editor.apply();*/
+        String json = myPrefs.getString("User", "");
+        Log.d("User obj", json);
+        User user_obj = gson.fromJson(json, User.class);
         Button page1Next = (Button) rootView.findViewById(R.id.button_seller1_1);
         Button page2Next = (Button) rootView.findViewById(R.id.button_seller2_1);
         Button page3Next = (Button) rootView.findViewById(R.id.button_seller3_1);
