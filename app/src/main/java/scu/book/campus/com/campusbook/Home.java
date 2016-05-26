@@ -76,7 +76,7 @@ public class Home extends Fragment implements View.OnClickListener, TextWatcher 
         adapter.notifyDataSetChanged();
         System.out.println("Book name is " + adapter.getItemCount());
 
-        RecyclerView.LayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 1);
+        RecyclerView.LayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
         imageListView.setLayoutManager(gridLayoutManager);
         imageListView.setItemAnimator(new DefaultItemAnimator());
         imageListView.addOnItemTouchListener(new RecyclerTouchListener(getContext(), imageListView, new ClickListener() {
