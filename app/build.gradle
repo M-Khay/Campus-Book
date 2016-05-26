@@ -24,11 +24,16 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile project(':android-cloud-sdk-v2.4.7')
-    compile 'com.google.firebase:firebase-server-sdk:3.0.0'
     compile 'com.google.code.gson:gson:2.6.2'
     compile 'com.android.support:appcompat-v7:24.0.0-beta1'
     compile 'com.android.support:design:24.0.0-beta1'
     compile 'com.android.support:cardview-v7:24.0.0-beta1'
     compile 'com.android.support:multidex:1.0.0'
     compile 'com.google.android.gms:play-services:9.0.0'
+    compile 'com.android.support:appcompat-v7:24.0.0-alpha2'
+    compile 'com.android.support:design:24.0.0-alpha2'
+    compile 'com.firebase:firebase-client-android:2.3.1'
+    compile 'com.android.support:cardview-v7:24.0.0-alpha2'
+    compile 'com.google.code.gson:gson:2.6.2'
+    compile 'com.firebase:firebase-client-android:2.3.1'
 }

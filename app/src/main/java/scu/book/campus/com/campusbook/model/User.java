@@ -5,9 +5,9 @@ package scu.book.campus.com.campusbook.model;
  * Created by kushahuja on 5/23/16.
  */
 public class User {
-    String name;
-    String email;
-    String phoneNumber;
+    public String name;
+    public String email;
+    public String phoneNumber;
     public boolean isRegistered;
 
     public User(){}

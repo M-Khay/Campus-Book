@@ -9,8 +9,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-
-
 import com.firebase.client.Firebase;
 import com.google.gson.Gson;
 

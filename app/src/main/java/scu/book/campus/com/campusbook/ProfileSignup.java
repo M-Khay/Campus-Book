@@ -12,7 +12,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.firebase.client.Firebase;
-import com.google.android.gms.auth.api.Auth;
+
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -46,14 +46,9 @@ public class ProfileSignup extends AppCompatActivity implements GoogleApiClient.
 
 
         Button signUp = (Button) findViewById(R.id.sign_up);
-        Button googleSignIn = (Button) findViewById(R.id.sign_in_button);
 
-        googleSignIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
-        });
+
 
         name = (EditText) findViewById(R.id.input_name);
         email = (EditText) findViewById(R.id.input_email);
@@ -61,13 +56,7 @@ public class ProfileSignup extends AppCompatActivity implements GoogleApiClient.
         //Creating a shared preference
 
 
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build();
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this , this)
-                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .build();
+
 
 
         signUp.setOnClickListener(new View.OnClickListener() {

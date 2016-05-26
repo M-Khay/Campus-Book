@@ -1,7 +1,5 @@
 package scu.book.campus.com.campusbook.model;
 
-import android.os.Parcel;
-import android.os.Parcelable;
 
 
 import java.util.List;
@@ -14,6 +12,7 @@ public class Books  {
     public String bookPrice;
     public String bookImage;
     public String sellerEmail;
+    public String sellerPhone;
     public String sellerName;
     public String sellerLocation;
     public String isbn;
@@ -37,6 +36,15 @@ public class Books  {
 
     public void setBookName(String bookName) {
         this.bookName = bookName;
+
+    }
+
+    public String getSellerPhone() {
+        return sellerPhone;
+    }
+
+    public void setSellerPhone(String sellerPhone) {
+        this.sellerPhone = sellerPhone;
 
     }
 
