@@ -285,7 +285,7 @@ public class Seller extends Fragment implements PlaceSelectionListener{
         // Format the returned place's details and display them in the TextView.
         location.setText(formatPlaceDetails(getResources(), place.getName(), place.getId(),
                 place.getAddress(), place.getPhoneNumber(), place.getWebsiteUri()));
-        location_s = place.getAddress().toString();
+        location_s = place.getName().toString();
         Log.d("location_s_update", location_s);
 
         CharSequence attributions = place.getAttributions();
