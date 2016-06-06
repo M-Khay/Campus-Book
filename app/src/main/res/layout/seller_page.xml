@@ -400,22 +400,34 @@
             android:id="@+id/seller_contact_location_t"
             style="@style/seller_textView_heading"
             android:layout_gravity="center_horizontal" />
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
 
-        <EditText
+            <fragment
+                android:id="@+id/autocomplete_fragment"
+                android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </android.support.v7.widget.CardView>
+
+        <TextView
             android:layout_marginTop="10dp"
-            android:layout_weight="0.1"
+            android:layout_weight="0.4"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:inputType="textPostalAddress"
             android:ems="10"
             android:layout_gravity="center"
             android:id="@+id/seller_contactlocation_et"
-            android:hint="Address" />
+             />
+
 
         <View
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.5"/>
+            android:layout_weight="0.2"/>
 
         <Button
             style="@style/seller_button_next"
