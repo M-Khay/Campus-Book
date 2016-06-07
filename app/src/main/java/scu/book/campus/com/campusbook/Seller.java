@@ -3,7 +3,6 @@ package scu.book.campus.com.campusbook;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -17,9 +16,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Html;
-import android.text.Spanned;
-import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -30,14 +26,9 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.client.Firebase;
-import com.google.android.gms.common.api.Status;
-import com.google.android.gms.location.places.Place;
-import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
-import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 import com.google.gson.Gson;
 
 import java.io.ByteArrayOutputStream;
@@ -46,14 +37,13 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import scu.book.campus.com.campusbook.activities.SampleActivityBase;
 import scu.book.campus.com.campusbook.model.Books;
 import scu.book.campus.com.campusbook.model.User;
 
 /**
  * Created by qizhao on 5/18/16.
  */
-public class Seller extends Fragment implements PlaceSelectionListener{
+public class Seller extends Fragment {
     private Uri imageUri;
     private String pictureImagePath = "";
     private String pic;
@@ -65,7 +55,6 @@ public class Seller extends Fragment implements PlaceSelectionListener{
     private String seller_email;
     private String seller_phone;
     Firebase myFirebaseRef;
-    TextView location;
 
     @Nullable
     @Override
@@ -94,22 +83,12 @@ public class Seller extends Fragment implements PlaceSelectionListener{
         final EditText book_name  = (EditText) rootView.findViewById(R.id.seller_bookName_et);
         final EditText isbn  = (EditText) rootView.findViewById(R.id.seller_isbn_et);
         final EditText price  = (EditText) rootView.findViewById(R.id.seller_price_et);
-        location = (TextView) rootView.findViewById(R.id.seller_contactlocation_et);
+        final EditText location = (EditText) rootView.findViewById(R.id.seller_contactlocation_et);
         final LinearLayout page1 = (LinearLayout) rootView.findViewById(R.id.seller_page1);
         final LinearLayout page2 = (LinearLayout) rootView.findViewById(R.id.seller_page2);
         final LinearLayout page3 = (LinearLayout) rootView.findViewById(R.id.seller_page3);
         final LinearLayout soldPage = (LinearLayout) rootView.findViewById(R.id.seller_page_sold);
         final ImageView mImg =  (ImageView) rootView.findViewById(R.id.imageView_seller2_1);
-
-
-        // Retrieve the PlaceAutocompleteFragment.
-        PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment) getActivity().
-                getFragmentManager().findFragmentById(R.id.autocomplete_fragment);
-
-        // Register a listener to receive callbacks when a place has been selected or an error has
-        // occurred.
-        autocompleteFragment.setOnPlaceSelectedListener(this);
-
 
         page1Next.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -187,7 +166,7 @@ public class Seller extends Fragment implements PlaceSelectionListener{
 
 
                 } else {
-
+                    location_s = location.getText().toString();
                     if (location_s == null || location_s.length() == 0){
                         Toast.makeText(getContext(), "Your book location is invalid, please re-enter!", Toast.LENGTH_SHORT).show();
                     } else {
@@ -274,6 +253,7 @@ public class Seller extends Fragment implements PlaceSelectionListener{
 
         return im;
     }
+<<<<<<< HEAD
     /**
      * Callback invoked when a place has been selected from the PlaceAutocompleteFragment.
      */
@@ -314,6 +294,8 @@ public class Seller extends Fragment implements PlaceSelectionListener{
         return Html.fromHtml(res.getString(R.string.place_details, name, address));
 
     }
+=======
+>>>>>>> parent of 16962f8... crash occurred
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
