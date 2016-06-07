@@ -32,10 +32,7 @@ dependencies {
     compile 'com.firebase:firebase-client-android:2.3.1'
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
     compile 'com.google.android.gms:play-services-location:9.0.0'
-=======
->>>>>>> parent of 16962f8... crash occurred
     compile 'com.google.android.gms:play-services-maps:9.0.0'
 =======
 >>>>>>> parent of 354c1c5... google map integrated basic

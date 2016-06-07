@@ -17,7 +17,7 @@ public class Books  {
     public String sellerLocation;
     public String isbn;
     public String sellerType;
-    public List<String> buyers;
+    public List<String> buyerList;
 
 //    public Books(String bookName, String bookPrice, String bookImage, String sellerEmail, String sellerName, String sellerLocation,
 //                 String isbn, String sellerType) {

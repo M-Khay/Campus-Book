@@ -1,5 +1,13 @@
 <resources>
     <string name="app_name">Campus Book</string>
+    <string name="selected_place">Last Selected Place:</string>
+    <string name="place_details">
+    <![CDATA[
+        <b>%1$s</b>
+        <br/>
+        Address: %2$s
+    ]]>
+    </string>
 
     <string name="hello_world">Hello world!</string>
     <string name="search_hint">Search</string>
