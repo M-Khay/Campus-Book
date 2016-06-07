@@ -1,33 +1,27 @@
 {
   "project_info": {
-    "project_number": "79868352375",
-    "project_id": "campus-book"
+    "project_number": "649648302636",
+    "firebase_url": "https://campus-book-demo2.firebaseio.com",
+    "project_id": "campus-book-demo2",
+    "storage_bucket": "campus-book-demo2.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:79868352375:android:f2ca4b7dd1ffd81e",
+        "mobilesdk_app_id": "1:649648302636:android:f2ca4b7dd1ffd81e",
         "android_client_info": {
           "package_name": "scu.book.campus.com.campusbook"
         }
       },
       "oauth_client": [
         {
-          "client_id": "79868352375-le5gp5h9l39pj0mddh8fs6tsmdga4b5n.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "scu.book.campus.com.campusbook",
-            "certificate_hash": "C6282D838D256281601EE7770084310C5DC101D3"
-          }
-        },
-        {
-          "client_id": "79868352375-0q03p6u25hqghcik438gjnpfcbs7j0k7.apps.googleusercontent.com",
+          "client_id": "649648302636-eg2rj40hgpqf9upopam6glocvujh49jh.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyA4WjQCDXNSoXiG3cU5s6p52Qsn2l_J2MM"
+          "current_key": "AIzaSyBkGeIsRpCvKaEcPUczFqo7qFSZBqtg3mE"
         }
       ],
       "services": {
@@ -39,7 +33,7 @@
           "other_platform_oauth_client": []
         },
         "ads_service": {
-          "status": 1
+          "status": 2
         }
       }
     }

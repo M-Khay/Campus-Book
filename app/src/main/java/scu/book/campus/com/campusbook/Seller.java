@@ -179,9 +179,11 @@ public class Seller extends Fragment {
                             new_book.sellerEmail = seller_email;
                         }
 
-
-
                         booksRef.push().setValue(new_book);
+
+
+
+
                         page3.setVisibility(View.GONE);
                         soldPage.setVisibility(View.VISIBLE);
                 }

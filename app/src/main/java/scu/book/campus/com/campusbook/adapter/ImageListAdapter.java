@@ -32,7 +32,7 @@ import scu.book.campus.com.campusbook.model.Books;
  * Created by kushahuja on 5/17/16.
  */
 public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.MyViewHolder> {
-    private List<Books> booksList= new ArrayList<>();
+    private List<Books> booksList = new ArrayList<>();
     Context context;
     Firebase firebaseRef;
 
@@ -57,15 +57,16 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.MyVi
 //
 //            }
 //        });
-        booksList= new ArrayList<>();
+        booksList = new ArrayList<>();
         firebaseRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                System.out.println("booklist size under chiled added " + booksList.size());
 
                 Books books = dataSnapshot.getValue(Books.class);
+                books.setKey(dataSnapshot.getKey());
 
                 booksList.add(books);
+                System.out.println("Booklist size under child added " + books.getKey());
 
             }
 
@@ -91,7 +92,7 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.MyVi
         });
         this.context = context;
 //        this.booksList= booksList;
-        SharedData.booksList=booksList;
+        SharedData.booksList = booksList;
 
     }
 
@@ -123,7 +124,7 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.MyVi
 
     @Override
     public int getItemCount() {
-        System.out.println("Booklist size returned  under getItemCount is  "+booksList.size());
+        System.out.println("Booklist size returned  under getItemCount is  " + booksList.size());
 
         return booksList.size();
 
@@ -138,7 +139,7 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.MyVi
         public MyViewHolder(View itemView) {
             super(itemView);
             bookName = (TextView) itemView.findViewById(R.id.book_name);
-            bookPrice= (TextView) itemView.findViewById(R.id.book_price);
+            bookPrice = (TextView) itemView.findViewById(R.id.book_price);
 
             bookImage = (ImageView) itemView.findViewById(R.id.book_img);
         }

@@ -1,12 +1,17 @@
 package scu.book.campus.com.campusbook;
 
 import android.app.ActionBar;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
+
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 
 /**
  * Created by kushahuja on 5/13/16.
@@ -22,6 +27,8 @@ public class HomeActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_page);
 
+        Intent intent = new Intent(this, RegistrationIntentService.class);
+        startService(intent);
         final ActionBar actionBar = getActionBar();
         mDemoCollectionPagerAdapter =
                 new DemoCollectionPagerAdapter(
@@ -41,6 +48,7 @@ public class HomeActivity extends FragmentActivity {
 
     }
 }
+
 // Since this is an object collection, use a FragmentStatePagerAdapter,
 // and NOT a FragmentPagerAdapter.
 class DemoCollectionPagerAdapter extends FragmentStatePagerAdapter {
@@ -51,10 +59,9 @@ class DemoCollectionPagerAdapter extends FragmentStatePagerAdapter {
     @Override
     public Fragment getItem(int i) {
 
-        Fragment fragment= null;
+        Fragment fragment = null;
 
-        switch (i)
-        {
+        switch (i) {
             case 0:
                 fragment = new Home();
                 break;
@@ -81,8 +88,7 @@ class DemoCollectionPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        switch (position)
-        {
+        switch (position) {
             case 0:
                 return "Home";
             case 1:
@@ -100,5 +106,7 @@ class DemoCollectionPagerAdapter extends FragmentStatePagerAdapter {
     public int getItemPosition(Object object) {
         return POSITION_NONE;
     }
+
+
 }
 
