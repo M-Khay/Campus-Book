@@ -198,7 +198,6 @@ public class Seller extends Fragment implements PlaceSelectionListener{
                             new_book.sellerPhone = seller_phone;
                             seller_email = user_obj.email;
                             new_book.sellerEmail = seller_email;
-                            new_book.sellerLocation = location_s;
                         }
 
 

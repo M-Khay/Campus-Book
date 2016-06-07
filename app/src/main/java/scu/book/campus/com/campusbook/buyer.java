@@ -1,10 +1,8 @@
 package scu.book.campus.com.campusbook;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -105,7 +103,6 @@ public class Buyer extends Fragment {
         Button page3Next = (Button) rootView.findViewById(R.id.button_buyer3_1);
         Button page2Back = (Button) rootView.findViewById(R.id.button5);
         Button page3Back = (Button) rootView.findViewById(R.id.button6);
-        Button showMap = (Button) rootView.findViewById(R.id.map_button);
         bookImage = (ImageView) rootView.findViewById(R.id.book_image);
         bookName = (TextView) rootView.findViewById(R.id.book_name);
         bookPrice = (TextView) rootView.findViewById(R.id.book_price);
@@ -185,16 +182,6 @@ public class Buyer extends Fragment {
                 page1.setVisibility(View.GONE);
                 page2.setVisibility(View.VISIBLE);
                 page3.setVisibility(View.GONE);
-            }
-        });
-        showMap.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), MapsActivity.class);
-                intent.putExtra("location_name", bookObj.sellerLocation);
-                intent.putExtra("seller",bookObj.sellerName);
-                intent.putExtra("seller_email",bookObj.sellerEmail);
-                startActivity(intent);
             }
         });
         return rootView;
