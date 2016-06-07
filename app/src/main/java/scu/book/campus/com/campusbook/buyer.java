@@ -250,27 +250,27 @@ public class Buyer extends Fragment {
 
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        System.out.println("Buyer page fragment visible  OnResume" + bookSelected);
-
-        if (bookSelected == true) {
-            SharedPreferences myPrefs = getContext().getSharedPreferences("myPrefs", getContext().MODE_PRIVATE);
-            String json = myPrefs.getString("selectedbook", "");
-            Log.d("Book obj", json);
-            Gson gson = new Gson();
-            bookObj = gson.fromJson(json, Books.class);
-            if (json != null || json != "")
-                bookName.setText(bookObj.getBookName());
-            bookPrice.setText(bookObj.getBookPrice());
-
-            Bitmap bookImageBitmap = SharedData.getDecodedImageFromString(bookObj.getBookImage());
-            bookImage.setImageBitmap(bookImageBitmap);
-
-
-        }
-
-    }
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        System.out.println("Buyer page fragment visible  OnResume" + bookSelected);
+//
+//        if (bookSelected == true) {
+//            SharedPreferences myPrefs = getContext().getSharedPreferences("myPrefs", getContext().MODE_PRIVATE);
+//            String json = myPrefs.getString("selectedbook", "");
+//            Log.d("Book obj", json);
+//            Gson gson = new Gson();
+//            bookObj = gson.fromJson(json, Books.class);
+//            if (json != null || json != "")
+//                bookName.setText(bookObj.getBookName());
+//            bookPrice.setText(bookObj.getBookPrice());
+//
+//            Bitmap bookImageBitmap = SharedData.getDecodedImageFromString(bookObj.getBookImage());
+//            bookImage.setImageBitmap(bookImageBitmap);
+//
+//
+//        }
+//
+//    }
 }
 
