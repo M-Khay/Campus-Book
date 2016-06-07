@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +22,9 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.Query;
 import com.google.gson.Gson;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import scu.book.campus.com.campusbook.Constants.SharedData;
 import scu.book.campus.com.campusbook.model.Books;
@@ -169,6 +171,29 @@ public class Buyer extends Fragment {
                 page3.setVisibility(View.GONE);
                 soldPage.setVisibility(View.VISIBLE);
 
+                Firebase myFirebaseRef = new Firebase("https://flickering-torch-3960.firebaseio.com");
+
+                System.out.println("Hello updating the buyer list"+bookObj.getKey());
+                Firebase buyerUpdate = myFirebaseRef.child("Books").child(bookObj.getKey());
+
+                // TO update the information
+                /*Firebase alanRef = usersRef.child("alanisawesome");
+                Map<String, Object> nickname = new HashMap<String, Object>();
+                nickname.put("nickname", "Alan The Machine");
+                alanRef.updateChildren(nickname);*/
+                System.out.println("Hello updating the buyer list"+bookObj.getKey());
+
+//                Firebase alanRef = myFirebaseRef.child("alanisawesome");
+                Map<String, Object> buyerList = new HashMap<String, Object>();
+                buyerList.put("buyerList", "Alan The Machine");
+
+                System.out.println("Hello updating the buyer list"+bookObj.getKey());
+
+                buyerUpdate.updateChildren(buyerList);
+//                buyerUpdate.child("sellerName").setValue("KKK");
+                System.out.println("Hello updating the buyer list"+bookObj.getKey());
+
+
             }
         });
         page2Back.setOnClickListener(new View.OnClickListener() {
@@ -249,6 +274,7 @@ public class Buyer extends Fragment {
                 bookPrice.setText(bookObj.getBookPrice());
                 isbn.setText(bookObj.getIsbn());
 
+                System.out.println("Selected book path is " + bookObj.getKey());
                 Bitmap bookImageBitmap = SharedData.getDecodedImageFromString(bookObj.getBookImage());
                 bookImage.setImageBitmap(bookImageBitmap);
 

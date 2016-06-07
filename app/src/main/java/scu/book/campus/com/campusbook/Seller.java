@@ -180,9 +180,11 @@ public class Seller extends Fragment {
                             new_book.sellerLocation = location_s;
                         }
 
-
-
                         booksRef.push().setValue(new_book);
+
+
+
+
                         page3.setVisibility(View.GONE);
                         soldPage.setVisibility(View.VISIBLE);
                 }

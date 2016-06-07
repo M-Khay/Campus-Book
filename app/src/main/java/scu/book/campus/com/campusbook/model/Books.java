@@ -1,13 +1,13 @@
 package scu.book.campus.com.campusbook.model;
 
 
-
 import java.util.List;
 
 /**
  * Created by kushahuja on 5/23/16.
  */
-public class Books  {
+public class Books {
+    public String key;
     public String bookName;
     public String bookPrice;
     public String bookImage;
@@ -32,6 +32,16 @@ public class Books  {
 //        this.isbn = isbn;
 //        this.sellerType = sellerType;
 //    }
+
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+
+    }
 
 
     public void setBookName(String bookName) {
