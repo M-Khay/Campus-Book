@@ -71,8 +71,10 @@ public class Seller extends Fragment implements PlaceSelectionListener{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
+
         View rootView = inflater.inflate(
                 R.layout.seller_page, container, false);
+
         final Books new_book = new Books();
         Gson gson = new Gson();
         SharedPreferences myPrefs = this.getActivity().getSharedPreferences("myPrefs", Context.MODE_PRIVATE);

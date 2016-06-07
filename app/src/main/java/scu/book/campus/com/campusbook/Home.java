@@ -48,7 +48,7 @@ public class Home extends Fragment implements View.OnClickListener, TextWatcher 
     Firebase firebaseRef;
     RecyclerView imageListView;
     ImageListAdapter adapter;
-   SharedPreferences myPrefs ;
+    SharedPreferences myPrefs ;
 
     @Nullable
     @Override
