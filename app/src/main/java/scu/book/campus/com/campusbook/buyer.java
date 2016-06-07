@@ -139,13 +139,15 @@ public class Buyer extends Fragment {
         page1Next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                page1.setVisibility(View.GONE);
-                page2.setVisibility(View.VISIBLE);
-                page3.setVisibility(View.GONE);
+                if (bookSelected == true) {
+                    page1.setVisibility(View.GONE);
+                    page2.setVisibility(View.VISIBLE);
+                    page3.setVisibility(View.GONE);
 
-                sellerName.setText(bookObj.sellerName);
-                sellerEmail.setText(bookObj.sellerEmail);
-                bookImageSecondPage.setImageBitmap(SharedData.getDecodedImageFromString(bookObj.getBookImage()));
+                    sellerName.setText(bookObj.sellerName);
+                    sellerEmail.setText(bookObj.sellerEmail);
+                    bookImageSecondPage.setImageBitmap(SharedData.getDecodedImageFromString(bookObj.getBookImage()));
+                }
             }
         });
         page2Next.setOnClickListener(new View.OnClickListener() {

@@ -2,6 +2,7 @@ package scu.book.campus.com.campusbook.model;
 
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,21 +18,20 @@ public class Books  {
     public String sellerLocation;
     public String isbn;
     public String sellerType;
-    public List<String> buyers;
+    public List<User> buyers = new ArrayList<>();
 
-//    public Books(String bookName, String bookPrice, String bookImage, String sellerEmail, String sellerName, String sellerLocation,
-//                 String isbn, String sellerType) {
-//
-//
-//        this.bookName = bookName;
-//        this.bookImage = bookImage;
-//        this.bookPrice = bookPrice;
-//        this.sellerEmail = sellerEmail;
-//        this.sellerName = sellerName;
-//        this.sellerLocation = sellerLocation;
-//        this.isbn = isbn;
-//        this.sellerType = sellerType;
-//    }
+    public Books() {}
+    public Books(String bookName, String bookPrice, String bookImage, String sellerEmail, String sellerName, String sellerLocation,
+                 String isbn, String sellerType) {
+        this.bookName = bookName;
+        this.bookImage = bookImage;
+        this.bookPrice = bookPrice;
+        this.sellerEmail = sellerEmail;
+        this.sellerName = sellerName;
+        this.sellerLocation = sellerLocation;
+        this.isbn = isbn;
+        this.sellerType = sellerType;
+    }
 
 
     public void setBookName(String bookName) {
@@ -114,6 +114,15 @@ public class Books  {
     public String getSellerType() {
         return sellerType;
     }
+
+    public List<User> getBuyers() {
+        return buyers;
+    }
+
+    public void setBuyers(List<User> buyers) {
+        this.buyers = buyers;
+    }
+
 
 //    @Override
 //    public int describeContents() {

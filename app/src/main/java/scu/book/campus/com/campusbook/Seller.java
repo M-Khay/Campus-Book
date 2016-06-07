@@ -290,8 +290,4 @@ public class Seller extends Fragment {
         return pic_bitmap;
     }
 
-
-
-
-
 }

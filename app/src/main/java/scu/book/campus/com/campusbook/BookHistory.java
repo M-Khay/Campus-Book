@@ -56,10 +56,10 @@ public class BookHistory extends AppCompatActivity implements AdapterView.OnItem
         final String json = myPrefs.getString("User", "");
         Log.d("User obj", json);
 
-//        if (json == null || json.length()==0) {
-//            Intent intent = new Intent(this,BookHistory_anonymous.class);
-//            startActivity(intent);
-//        }
+        if (json == null || json.length()==0) {
+            Intent intent = new Intent(this,BookHistory_anonymous.class);
+            startActivity(intent);
+        }
 
         final User user_obj = gson.fromJson(json, User.class);
         seller_email = user_obj.getEmail();
