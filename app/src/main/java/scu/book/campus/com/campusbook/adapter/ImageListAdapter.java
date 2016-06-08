@@ -43,7 +43,6 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.MyVi
         Firebase.setAndroidContext(context);
         firebaseRef = new Firebase("https://flickering-torch-3960.firebaseio.com/Books");
 
-        System.out.println("Image list adapter started");
 //        Firebase booksRefs = firebaseRef.child("Books");
 
 //        firebaseRef.addValueEventListener(new ValueEventListener() {
@@ -64,18 +63,21 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.MyVi
         firebaseRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                System.out.println("Booklist size under child added " + dataSnapshot.toString());
+                System.out.println("Booklist size under child added " + dataSnapshot.getKey());
 
                 BuyerList books = dataSnapshot.getValue(BuyerList.class);
 //                books.setKey(dataSnapshot.getKey());
 
+                books.setKey(dataSnapshot.getKey());
                 booksList.add(books);
+                System.out.println("Book key is  " + books.getKey());
 
-try {
-    System.out.println("And the email is " + books.getBuyerDetails().getEmail() + "And the name is " + books.getBuyerDetails().getName());
-}catch (NullPointerException npe){
-    Log.d("Not found", "Email or name not found");
-}
+                try {
+                    System.out.println("And the email is " + books.getBuyerDetails().getEmail() + "And the name is " + books.getBuyerDetails().getName());
+                } catch (NullPointerException npe) {
+                    Log.d("Not found", "Email or name not found");
+                }
+                notifyDataSetChanged();
             }
 
             @Override

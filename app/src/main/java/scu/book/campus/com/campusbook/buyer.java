@@ -21,6 +21,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
@@ -36,6 +37,7 @@ import java.util.Map;
 import scu.book.campus.com.campusbook.Constants.SharedData;
 import scu.book.campus.com.campusbook.adapter.BuyerBookListAdapter;
 import scu.book.campus.com.campusbook.model.Books;
+import scu.book.campus.com.campusbook.model.BuyerDetails;
 import scu.book.campus.com.campusbook.model.BuyerList;
 import scu.book.campus.com.campusbook.model.User;
 
@@ -45,7 +47,7 @@ import scu.book.campus.com.campusbook.model.User;
 public class Buyer extends Fragment implements AdapterView.OnItemClickListener {
 
     public static boolean bookSelected = false;
-    Books bookObj;
+    BuyerList bookObj;
 
     ImageView bookImage;
     TextView bookName;
@@ -75,6 +77,7 @@ public class Buyer extends Fragment implements AdapterView.OnItemClickListener {
     int totalNumberOfbooks = 0;
     SharedPreferences myPrefs;
     String seller_email;
+    User user_obj;
 
     @Nullable
     @Override
@@ -92,12 +95,10 @@ public class Buyer extends Fragment implements AdapterView.OnItemClickListener {
         Log.d("User obj", json);
 
         if (json != null && json.length() != 0) {
-            final User user_obj = gson.fromJson(json, User.class);
+            user_obj = gson.fromJson(json, User.class);
             seller_email = user_obj.getEmail();
             Log.d("seller_email", seller_email);
         }
-
-
 
 
         //for firebase
@@ -228,13 +229,13 @@ public class Buyer extends Fragment implements AdapterView.OnItemClickListener {
         page1Next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    page1.setVisibility(View.GONE);
-                    page2.setVisibility(View.VISIBLE);
-                    page3.setVisibility(View.GONE);
+                page1.setVisibility(View.GONE);
+                page2.setVisibility(View.VISIBLE);
+                page3.setVisibility(View.GONE);
 
-                    sellerName.setText(bookObj.sellerName);
-                    sellerEmail.setText(bookObj.sellerEmail);
-                    bookImageSecondPage.setImageBitmap(SharedData.getDecodedImageFromString(bookObj.getBookImage()));
+                sellerName.setText(bookObj.getSellerName());
+                sellerEmail.setText(bookObj.getSellerEmail());
+                bookImageSecondPage.setImageBitmap(SharedData.getDecodedImageFromString(bookObj.getBookImage()));
             }
         });
         page2Next.setOnClickListener(new View.OnClickListener() {
@@ -254,7 +255,6 @@ public class Buyer extends Fragment implements AdapterView.OnItemClickListener {
                 soldPage.setVisibility(View.VISIBLE);
 
                 Firebase myFirebaseRef = new Firebase("https://flickering-torch-3960.firebaseio.com");
-
                 System.out.println("Hello updating the buyer list" + bookObj.getKey());
                 Firebase buyerUpdate = myFirebaseRef.child("Books").child(bookObj.getKey());
 
@@ -263,15 +263,23 @@ public class Buyer extends Fragment implements AdapterView.OnItemClickListener {
                 Map<String, Object> nickname = new HashMap<String, Object>();
                 nickname.put("nickname", "Alan The Machine");
                 alanRef.updateChildren(nickname);*/
-                System.out.println("Hello updating the buyer list" + bookObj.getKey());
 
 //                Firebase alanRef = myFirebaseRef.child("alanisawesome");
-                Map<String, Object> buyerList = new HashMap<String, Object>();
-                buyerList.put("buyerList", "Alan The Machine");
+//                Map<String, Object> buyerList = new HashMap<String, Object>();
+//
+//                Map<String, Object> buyerList = new ObjectMapper().convertValue(bd, Map.class);
+//                buyerList.put("buyerDetails", bd);
 
-                System.out.println("Hello updating the buyer list" + bookObj.getKey());
+                System.out.println("Hello updating the buyer list" + user_obj.getName()
+                );
+                BuyerDetails bd = new BuyerDetails();
+                bd.setName(user_obj.getName());
+                bd.setEmail(user_obj.getEmail());
+                bookObj.setBuyerDetails(bd);
+//    bookObj.getBuyerDetails().setEmail(user_obj.getEmail());
 
-                buyerUpdate.updateChildren(buyerList);
+//                buyerUpdate.
+                buyerUpdate.setValue(bookObj);
 //                buyerUpdate.child("sellerName").setValue("KKK");
                 System.out.println("Hello updating the buyer list" + bookObj.getKey());
 
@@ -298,9 +306,9 @@ public class Buyer extends Fragment implements AdapterView.OnItemClickListener {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), MapsActivity.class);
-                intent.putExtra("location_name", bookObj.sellerLocation);
-                intent.putExtra("seller", bookObj.sellerName);
-                intent.putExtra("seller_email", bookObj.sellerEmail);
+                intent.putExtra("location_name", bookObj.getSellerLocation());
+                intent.putExtra("seller", bookObj.getSellerName());
+                intent.putExtra("seller_email", bookObj.getSellerEmail());
                 startActivity(intent);
             }
         });
@@ -358,7 +366,7 @@ public class Buyer extends Fragment implements AdapterView.OnItemClickListener {
                 String json = myPrefs.getString("selectedbook", "");
                 Log.d("Book obj", json);
                 Gson gson = new Gson();
-                bookObj = gson.fromJson(json, Books.class);
+                bookObj = gson.fromJson(json, BuyerList.class);
                 if (json != null || json != "")
                     bookName.setText(bookObj.getBookName());
                 bookPrice.setText(bookObj.getBookPrice());
