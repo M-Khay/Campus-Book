@@ -273,24 +273,24 @@
                     android:layout_weight="0.3"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Selling Type"
+                    android:text="Type"
                     android:id="@+id/seller_contact"
                     style="@style/seller_textView"/>
 
                 <CheckBox
-                    android:layout_width="0dp"
+                    android:layout_width="10dp"
                     android:layout_height="wrap_content"
                     android:text="Sell"
                     android:id="@+id/seller_sell_checkbox"
-                    android:layout_weight="0.3"
+                    android:layout_weight="0.35"
                     android:checked="false" />
 
                 <CheckBox
-                    android:layout_width="0dp"
+                    android:layout_width="10dp"
                     android:layout_height="wrap_content"
                     android:text="Rent"
                     android:id="@+id/seller_rent_checkbox"
-                    android:layout_weight="0.3"
+                    android:layout_weight="0.35"
                     android:checked="false" />
 
             </LinearLayout>
