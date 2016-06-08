@@ -365,9 +365,8 @@ public class Buyer extends Fragment implements AdapterView.OnItemClickListener {
                 isbn.setText(bookObj.getIsbn());
 
                 System.out.println("Selected book path is " + bookObj.getKey());
-//                Bitmap bookImageBitmap = SharedData.getDecodedImageFromString(bookObj.getBookImage());
-//                bookImage.setImageBitmap(bookImageBitmap);
-
+                Bitmap bookImageBitmap = SharedData.getDecodedImageFromString(bookObj.getBookImage());
+                bookImage.setImageBitmap(bookImageBitmap);
 
             }
         }
