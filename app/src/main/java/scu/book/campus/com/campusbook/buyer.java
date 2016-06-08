@@ -91,14 +91,13 @@ public class Buyer extends Fragment implements AdapterView.OnItemClickListener {
         final String json = myPrefs.getString("User", "");
         Log.d("User obj", json);
 
-//        if (json == null || json.length() == 0) {
-//            Intent intent = new Intent(getActivity(), BookHistory_anonymous.class);
-//            startActivity(intent);
-//        }
+        if (json != null && json.length() != 0) {
+            final User user_obj = gson.fromJson(json, User.class);
+            seller_email = user_obj.getEmail();
+            Log.d("seller_email", seller_email);
+        }
 
-        final User user_obj = gson.fromJson(json, User.class);
-        seller_email = user_obj.getEmail();
-        Log.d("seller_email", seller_email);
+
 
 
         //for firebase
@@ -229,7 +228,6 @@ public class Buyer extends Fragment implements AdapterView.OnItemClickListener {
         page1Next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (bookSelected == true) {
                     page1.setVisibility(View.GONE);
                     page2.setVisibility(View.VISIBLE);
                     page3.setVisibility(View.GONE);
@@ -237,7 +235,6 @@ public class Buyer extends Fragment implements AdapterView.OnItemClickListener {
                     sellerName.setText(bookObj.sellerName);
                     sellerEmail.setText(bookObj.sellerEmail);
                     bookImageSecondPage.setImageBitmap(SharedData.getDecodedImageFromString(bookObj.getBookImage()));
-                }
             }
         });
         page2Next.setOnClickListener(new View.OnClickListener() {

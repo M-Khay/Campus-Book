@@ -158,7 +158,7 @@ public class Seller extends Fragment {
             public void onClick(View v) {
                 if (json == null || json.length()==0){
 
-                    Intent gotoSignup = new Intent(getActivity(), ProfileSignup.class);
+                    Intent gotoSignup = new Intent(getActivity(), LandingPage.class);
                     startActivity(gotoSignup);
                     Toast.makeText(getContext(), "Please Signup first to sell books!", Toast.LENGTH_SHORT).show();
 
