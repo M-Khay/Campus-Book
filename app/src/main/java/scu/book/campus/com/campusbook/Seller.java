@@ -177,6 +177,7 @@ public class Seller extends Fragment {
                             new_book.sellerPhone = seller_phone;
                             seller_email = user_obj.email;
                             new_book.sellerEmail = seller_email;
+                            new_book.sellerLocation = location_s;
                         }
 
                         booksRef.push().setValue(new_book);
