@@ -1,5 +1,7 @@
 package scu.book.campus.com.campusbook;
 
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -9,9 +11,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.firebase.client.ChildEventListener;
@@ -21,17 +26,20 @@ import com.firebase.client.FirebaseError;
 import com.firebase.client.Query;
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import scu.book.campus.com.campusbook.Constants.SharedData;
+import scu.book.campus.com.campusbook.adapter.BuyerBookListAdapter;
 import scu.book.campus.com.campusbook.model.Books;
 import scu.book.campus.com.campusbook.model.User;
 
 /**
  * Created by qizhao on 5/18/16.
  */
-public class Buyer extends Fragment {
+public class Buyer extends Fragment implements AdapterView.OnItemClickListener {
 
     public static boolean bookSelected = false;
     Books bookObj;
@@ -50,10 +58,20 @@ public class Buyer extends Fragment {
 
     LinearLayout page1;
     LinearLayout page2;
+
+    RelativeLayout page0;
     LinearLayout page3;
 
 
     ImageView bookImageSThirdPAge;
+
+
+    Firebase myFirebaseRef;
+    List<Books> list;
+    BuyerBookListAdapter adapter;
+    int totalNumberOfbooks = 0;
+    SharedPreferences myPrefs;
+    String seller_email;
 
     @Nullable
     @Override
@@ -62,6 +80,65 @@ public class Buyer extends Fragment {
         Firebase firebaseRef;
         View rootView = inflater.inflate(
                 R.layout.buyer_page, container, false);
+        list = new ArrayList<>();
+
+        // get user information
+        Gson gson = new Gson();
+        myPrefs = getActivity().getSharedPreferences("myPrefs", Context.MODE_PRIVATE);
+        final String json = myPrefs.getString("User", "");
+        Log.d("User obj", json);
+
+//        if (json == null || json.length() == 0) {
+//            Intent intent = new Intent(getActivity(), BookHistory_anonymous.class);
+//            startActivity(intent);
+//        }
+
+        final User user_obj = gson.fromJson(json, User.class);
+        seller_email = user_obj.getEmail();
+        Log.d("seller_email", seller_email);
+
+
+        //for firebase
+        Firebase.setAndroidContext(getActivity());
+        myFirebaseRef = new Firebase("https://flickering-torch-3960.firebaseio.com").child("Books");
+        Query query = myFirebaseRef.orderByChild("sellerEmail").equalTo(seller_email);
+
+        query.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                Books books = dataSnapshot.getValue(Books.class);
+                list.add(books);
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+
+        });
+
+        totalNumberOfbooks = list.size();
+        ListView lv = (ListView) rootView.findViewById(R.id.listView_buyer_book);
+        adapter = new BuyerBookListAdapter(getActivity(), lv.getId(), list);
+        lv.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+        lv.setOnItemClickListener(this);
 
         Firebase.setAndroidContext(getContext());
         firebaseRef = new Firebase("https://flickering-torch-3960.firebaseio.com/Books");
@@ -69,8 +146,8 @@ public class Buyer extends Fragment {
 
         System.out.println("Buyer page started");
 
-        Query query = firebaseRef.orderByChild("sellerEmail").equalTo("kkju@gmail.com");
-        query.addChildEventListener(new ChildEventListener() {
+        Query query2 = firebaseRef.orderByChild("sellerEmail").equalTo("kkju@gmail.com");
+        query2.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
@@ -120,7 +197,14 @@ public class Buyer extends Fragment {
         page1 = (LinearLayout) rootView.findViewById(R.id.buyer_page1);
         page2 = (LinearLayout) rootView.findViewById(R.id.buyer_page2);
         page3 = (LinearLayout) rootView.findViewById(R.id.buyer_page3);
-
+        page0 = (RelativeLayout) rootView.findViewById(R.id.buyer_page0);
+        if (bookSelected == false) {
+            System.out.println("Changing the visinility");
+            page0.setVisibility(View.VISIBLE);
+            page1.setVisibility(View.GONE);
+            page2.setVisibility(View.GONE);
+            page3.setVisibility(View.GONE);
+        }
         final LinearLayout soldPage = (LinearLayout) rootView.findViewById(R.id.seller_page_sold);
 //        final SharedPreferences myPrefs = getContext().getSharedPreferences("myPrefs", getContext().MODE_PRIVATE);
 //        if (bookSelected == true) {
@@ -170,7 +254,7 @@ public class Buyer extends Fragment {
 
                 Firebase myFirebaseRef = new Firebase("https://flickering-torch-3960.firebaseio.com");
 
-                System.out.println("Hello updating the buyer list"+bookObj.getKey());
+                System.out.println("Hello updating the buyer list" + bookObj.getKey());
                 Firebase buyerUpdate = myFirebaseRef.child("Books").child(bookObj.getKey());
 
                 // TO update the information
@@ -178,17 +262,17 @@ public class Buyer extends Fragment {
                 Map<String, Object> nickname = new HashMap<String, Object>();
                 nickname.put("nickname", "Alan The Machine");
                 alanRef.updateChildren(nickname);*/
-                System.out.println("Hello updating the buyer list"+bookObj.getKey());
+                System.out.println("Hello updating the buyer list" + bookObj.getKey());
 
 //                Firebase alanRef = myFirebaseRef.child("alanisawesome");
                 Map<String, Object> buyerList = new HashMap<String, Object>();
                 buyerList.put("buyerList", "Alan The Machine");
 
-                System.out.println("Hello updating the buyer list"+bookObj.getKey());
+                System.out.println("Hello updating the buyer list" + bookObj.getKey());
 
                 buyerUpdate.updateChildren(buyerList);
 //                buyerUpdate.child("sellerName").setValue("KKK");
-                System.out.println("Hello updating the buyer list"+bookObj.getKey());
+                System.out.println("Hello updating the buyer list" + bookObj.getKey());
 
 
             }
@@ -209,6 +293,8 @@ public class Buyer extends Fragment {
                 page3.setVisibility(View.GONE);
             }
         });
+
+
         return rootView;
     }
 
@@ -244,13 +330,21 @@ public class Buyer extends Fragment {
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         Log.d("Book obj", "SetUserVisibliitHint " + isVisibleToUser + " is book selected" + bookSelected);
+
         if (isVisibleToUser) {
-
-            page1.setVisibility(View.VISIBLE);
-            page2.setVisibility(View.GONE);
-            page3.setVisibility(View.GONE);
-
+            if (bookSelected == false) {
+                System.out.println("Changing the visinility");
+                page0.setVisibility(View.VISIBLE);
+                page1.setVisibility(View.GONE);
+                page2.setVisibility(View.GONE);
+                page3.setVisibility(View.GONE);
+            }
             if (bookSelected == true) {
+                page0.setVisibility(View.GONE);
+                page1.setVisibility(View.VISIBLE);
+                page2.setVisibility(View.GONE);
+                page3.setVisibility(View.GONE);
+                bookSelected = false;
                 SharedPreferences myPrefs = getContext().getSharedPreferences("myPrefs", getContext().MODE_PRIVATE);
                 String json = myPrefs.getString("selectedbook", "");
                 Log.d("Book obj", json);
@@ -262,8 +356,8 @@ public class Buyer extends Fragment {
                 isbn.setText(bookObj.getIsbn());
 
                 System.out.println("Selected book path is " + bookObj.getKey());
-                Bitmap bookImageBitmap = SharedData.getDecodedImageFromString(bookObj.getBookImage());
-                bookImage.setImageBitmap(bookImageBitmap);
+//                Bitmap bookImageBitmap = SharedData.getDecodedImageFromString(bookObj.getBookImage());
+//                bookImage.setImageBitmap(bookImageBitmap);
 
 
             }
@@ -278,27 +372,11 @@ public class Buyer extends Fragment {
 
     }
 
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//        System.out.println("Buyer page fragment visible  OnResume" + bookSelected);
-//
-//        if (bookSelected == true) {
-//            SharedPreferences myPrefs = getContext().getSharedPreferences("myPrefs", getContext().MODE_PRIVATE);
-//            String json = myPrefs.getString("selectedbook", "");
-//            Log.d("Book obj", json);
-//            Gson gson = new Gson();
-//            bookObj = gson.fromJson(json, Books.class);
-//            if (json != null || json != "")
-//                bookName.setText(bookObj.getBookName());
-//            bookPrice.setText(bookObj.getBookPrice());
-//
-//            Bitmap bookImageBitmap = SharedData.getDecodedImageFromString(bookObj.getBookImage());
-//            bookImage.setImageBitmap(bookImageBitmap);
-//
-//
-//        }
-//
-//    }
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Books book = list.get(position);
+
+    }
+
 }
 

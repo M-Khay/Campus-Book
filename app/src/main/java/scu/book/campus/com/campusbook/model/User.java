@@ -1,10 +1,12 @@
 package scu.book.campus.com.campusbook.model;
 
 
+import java.io.Serializable;
+
 /**
  * Created by kushahuja on 5/23/16.
  */
-public class User {
+public class User implements Serializable {
     public String name;
     public String email;
     public String phoneNumber;
@@ -44,6 +46,10 @@ public class User {
     public void setEmail(String email)
     {
         this.email= email;
+    }
+
+    public String toString() {
+        return name + ", " + email;
     }
 
 

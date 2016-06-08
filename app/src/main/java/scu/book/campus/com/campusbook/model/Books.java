@@ -1,6 +1,9 @@
 package scu.book.campus.com.campusbook.model;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,21 +20,24 @@ public class Books {
     public String sellerLocation;
     public String isbn;
     public String sellerType;
-    public List<String> buyers;
+    public BuyerDetails buyerDetails;
 
-//    public Books(String bookName, String bookPrice, String bookImage, String sellerEmail, String sellerName, String sellerLocation,
-//                 String isbn, String sellerType) {
-//
-//
-//        this.bookName = bookName;
-//        this.bookImage = bookImage;
-//        this.bookPrice = bookPrice;
-//        this.sellerEmail = sellerEmail;
-//        this.sellerName = sellerName;
-//        this.sellerLocation = sellerLocation;
-//        this.isbn = isbn;
-//        this.sellerType = sellerType;
-//    }
+
+    public Books() {
+    }
+
+    public Books(String bookName, String bookPrice, String bookImage, String sellerEmail, String sellerName, String sellerLocation,
+                 String isbn, String sellerType,BuyerDetails buyerDetails) {
+        this.bookName = bookName;
+        this.bookImage = bookImage;
+        this.bookPrice = bookPrice;
+        this.sellerEmail = sellerEmail;
+        this.sellerName = sellerName;
+        this.sellerLocation = sellerLocation;
+        this.isbn = isbn;
+        this.sellerType = sellerType;
+        this.buyerDetails= buyerDetails;
+    }
 
 
     public String getKey() {
@@ -124,6 +130,15 @@ public class Books {
     public String getSellerType() {
         return sellerType;
     }
+
+    public BuyerDetails getBuyers() {
+        return buyerDetails;
+    }
+
+    public void setBuyers(BuyerDetails buyerDetails) {
+        this.buyerDetails = buyerDetails;
+    }
+
 
 //    @Override
 //    public int describeContents() {

@@ -7,6 +7,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,15 +25,17 @@ import com.firebase.client.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import scu.book.campus.com.campusbook.Buyer;
 import scu.book.campus.com.campusbook.Constants.SharedData;
 import scu.book.campus.com.campusbook.R;
 import scu.book.campus.com.campusbook.model.Books;
+import scu.book.campus.com.campusbook.model.BuyerList;
 
 /**
  * Created by kushahuja on 5/17/16.
  */
 public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.MyViewHolder> {
-    private List<Books> booksList = new ArrayList<>();
+    private List<BuyerList> booksList = new ArrayList<>();
     Context context;
     Firebase firebaseRef;
 
@@ -61,13 +64,18 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.MyVi
         firebaseRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                System.out.println("Booklist size under child added " + dataSnapshot.toString());
 
-                Books books = dataSnapshot.getValue(Books.class);
-                books.setKey(dataSnapshot.getKey());
+                BuyerList books = dataSnapshot.getValue(BuyerList.class);
+//                books.setKey(dataSnapshot.getKey());
 
                 booksList.add(books);
-                System.out.println("Booklist size under child added " + books.getKey());
 
+try {
+    System.out.println("And the email is " + books.getBuyerDetails().getEmail() + "And the name is " + books.getBuyerDetails().getName());
+}catch (NullPointerException npe){
+    Log.d("Not found", "Email or name not found");
+}
             }
 
             @Override
@@ -108,17 +116,17 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.MyVi
     @Override
     public void onBindViewHolder(ImageListAdapter.MyViewHolder holder, int position) {
 
-        Books book = booksList.get(position);
-        holder.bookName.setText(book.bookName);
-        holder.bookPrice.setText(book.bookPrice);
+        BuyerList book = booksList.get(position);
+        holder.bookName.setText(book.getBookName());
+        holder.bookPrice.setText(book.getBookPrice());
 
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inSampleSize = 8; // Experiment with different sizes
 
-        byte[] decodedImage = Base64.decode(book.getBookImage(), Base64.DEFAULT);
-        Bitmap decodedImageByte = BitmapFactory.decodeByteArray(decodedImage, 0, decodedImage.length);
-
-        holder.bookImage.setImageBitmap(decodedImageByte);
+//        byte[] decodedImage = Base64.decode(book.getBookImage(), Base64.DEFAULT);
+//        Bitmap decodedImageByte = BitmapFactory.decodeByteArray(decodedImage, 0, decodedImage.length);
+//
+//        holder.bookImage.setImageBitmap(decodedImageByte);
 
     }
 
@@ -145,9 +153,9 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.MyVi
         }
     }
 
-    public Books getImageObjectAtPosition(int position) {
+    public BuyerList getImageObjectAtPosition(int position) {
 
-        Books image = booksList.get(position);
+        BuyerList image = booksList.get(position);
         return image;
     }
 

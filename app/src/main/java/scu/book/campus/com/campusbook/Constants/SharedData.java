@@ -7,14 +7,15 @@ import android.util.Base64;
 import java.util.ArrayList;
 import java.util.List;
 
-import scu.book.campus.com.campusbook.model.Books;
+import scu.book.campus.com.campusbook.model.BuyerList;
 
 /**
  * Created by kushahuja on 5/25/16.
  */
 public class SharedData {
 
-    public static List<Books> booksList= new ArrayList<>();
+    public static List<BuyerList> booksList= new ArrayList<>();
+
 
     public static Bitmap getDecodedImageFromString(String imageStringBase64){
 
