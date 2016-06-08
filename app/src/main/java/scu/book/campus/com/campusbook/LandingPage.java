@@ -28,7 +28,7 @@ import com.google.gson.Gson;
 import scu.book.campus.com.campusbook.model.User;
 
 
-public class LandingPage extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener{
+public class LandingPage extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
     private static final String TAG = "SignInActivity";
     private static final int RC_SIGN_IN = 9001;
 
@@ -49,7 +49,7 @@ public class LandingPage extends AppCompatActivity implements GoogleApiClient.On
         myFirebaseRef = new Firebase("https://flickering-torch-3960.firebaseio.com/");
 
 
-        if (json != null && json.length()!=0){
+        if (json != null && json.length() != 0) {
 
 
             User user_obj = gson.fromJson(json, User.class);
@@ -61,7 +61,6 @@ public class LandingPage extends AppCompatActivity implements GoogleApiClient.On
 
         }
         setContentView(R.layout.landing_page);
-
 
 
         // [START configure_signin]
@@ -133,7 +132,6 @@ public class LandingPage extends AppCompatActivity implements GoogleApiClient.On
     }*/
 
 
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -144,6 +142,7 @@ public class LandingPage extends AppCompatActivity implements GoogleApiClient.On
             handleSignInResult(result);
         }
     }
+
     private void showProgressDialog() {
         if (mProgressDialog == null) {
             mProgressDialog = new ProgressDialog(this);
@@ -179,16 +178,17 @@ public class LandingPage extends AppCompatActivity implements GoogleApiClient.On
             prefsEditor.putString("User", json);
             prefsEditor.commit();
 
-            Intent homePage = new Intent(LandingPage.this,HomeActivity.class);
+            Intent homePage = new Intent(LandingPage.this, HomeActivity.class);
             startActivity(homePage);
             //mStatusTextView.setText(getString(R.string.signed_in_fmt, acct.getDisplayName()));
             //updateUI(true);
         } else {
-            Toast.makeText(getApplicationContext(),"Google login failed" , Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Google login failed", Toast.LENGTH_SHORT).show();
             // Signed out, show unauthenticated UI.
             //updateUI(false);
         }
     }
+
     // [END handleSignInResult]
     // [END onActivityResult]
     // [START signIn]
@@ -196,6 +196,7 @@ public class LandingPage extends AppCompatActivity implements GoogleApiClient.On
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
+
     // [END signIn]
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
@@ -207,7 +208,7 @@ public class LandingPage extends AppCompatActivity implements GoogleApiClient.On
     @Override
     protected void onPause() {
         super.onPause();
-        //finish();
+        finish();
     }
 
     @Override
@@ -231,6 +232,7 @@ public class LandingPage extends AppCompatActivity implements GoogleApiClient.On
 
         return super.onOptionsItemSelected(item);
     }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
