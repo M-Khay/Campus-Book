@@ -39,7 +39,6 @@
             android:layout_height="0dp"
             android:layout_gravity="center_horizontal"
             android:id="@+id/book_image"
-            android:background="@drawable/book_cover_1"
             android:layout_weight="0.35"/>
 
         <TextView

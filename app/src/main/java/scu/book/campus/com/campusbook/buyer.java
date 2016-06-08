@@ -251,14 +251,24 @@ public class Buyer extends Fragment implements AdapterView.OnItemClickListener {
         page3Next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                page3.setVisibility(View.GONE);
-                soldPage.setVisibility(View.VISIBLE);
+                if (json == null || json.length()==0){
 
-                Firebase myFirebaseRef = new Firebase("https://flickering-torch-3960.firebaseio.com");
-                System.out.println("Hello updating the buyer list" + bookObj.getKey());
-                Firebase buyerUpdate = myFirebaseRef.child("Books").child(bookObj.getKey());
+                    Intent gotoSignup = new Intent(getActivity(), LandingPage.class);
+                    startActivity(gotoSignup);
+                    Toast.makeText(getContext(), "Please Signup first to sell books!", Toast.LENGTH_SHORT).show();
 
-                // TO update the information
+
+
+
+                } else {
+                    page3.setVisibility(View.GONE);
+                    soldPage.setVisibility(View.VISIBLE);
+
+                    Firebase myFirebaseRef = new Firebase("https://flickering-torch-3960.firebaseio.com");
+                    System.out.println("Hello updating the buyer list" + bookObj.getKey());
+                    Firebase buyerUpdate = myFirebaseRef.child("Books").child(bookObj.getKey());
+
+                    // TO update the information
                 /*Firebase alanRef = usersRef.child("alanisawesome");
                 Map<String, Object> nickname = new HashMap<String, Object>();
                 nickname.put("nickname", "Alan The Machine");
@@ -270,18 +280,20 @@ public class Buyer extends Fragment implements AdapterView.OnItemClickListener {
 //                Map<String, Object> buyerList = new ObjectMapper().convertValue(bd, Map.class);
 //                buyerList.put("buyerDetails", bd);
 
-                System.out.println("Hello updating the buyer list" + user_obj.getName()
-                );
-                BuyerDetails bd = new BuyerDetails();
-                bd.setName(user_obj.getName());
-                bd.setEmail(user_obj.getEmail());
-                bookObj.setBuyerDetails(bd);
+                    System.out.println("Hello updating the buyer list" + user_obj.getName()
+                    );
+                    BuyerDetails bd = new BuyerDetails();
+                    bd.setName(user_obj.getName());
+                    bd.setEmail(user_obj.getEmail());
+                    bookObj.setBuyerDetails(bd);
 //    bookObj.getBuyerDetails().setEmail(user_obj.getEmail());
 
 //                buyerUpdate.
-                buyerUpdate.setValue(bookObj);
+                    buyerUpdate.setValue(bookObj);
 //                buyerUpdate.child("sellerName").setValue("KKK");
-                System.out.println("Hello updating the buyer list" + bookObj.getKey());
+                    System.out.println("Hello updating the buyer list" + bookObj.getKey());
+                }
+
 
 
             }
