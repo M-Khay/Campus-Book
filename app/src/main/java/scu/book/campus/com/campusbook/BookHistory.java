@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
@@ -33,13 +34,14 @@ import java.util.List;
 import scu.book.campus.com.campusbook.Constants.SharedData;
 import scu.book.campus.com.campusbook.adapter.BuyerBookListAdapter;
 import scu.book.campus.com.campusbook.model.Books;
+import scu.book.campus.com.campusbook.model.BuyerList;
 import scu.book.campus.com.campusbook.model.User;
 
 
 public class BookHistory extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     Firebase myFirebaseRef;
-    List<Books> list;
+    List<BuyerList> list;
     BuyerBookListAdapter adapter;
     int totalNumberOfbooks = 0;
     SharedPreferences myPrefs;
@@ -75,7 +77,7 @@ public class BookHistory extends AppCompatActivity implements AdapterView.OnItem
         query.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                Books books = dataSnapshot.getValue(Books.class);
+                BuyerList books = dataSnapshot.getValue(BuyerList.class);
                 list.add(books);
                 adapter.notifyDataSetChanged();
             }
@@ -113,7 +115,7 @@ public class BookHistory extends AppCompatActivity implements AdapterView.OnItem
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-        Books book = list.get(position);
+        BuyerList book = list.get(position);
 
 
 //        ArrayList<Object> buyers = (ArrayList<Object>) book.getBuyers();
@@ -128,13 +130,25 @@ public class BookHistory extends AppCompatActivity implements AdapterView.OnItem
 //        String buyernames = "book1_buyer1,book1_buyer2";
 //        String buyeremails = "book1_buyer1@google.com,book1_buyer2@google.com";
 //
-//        SharedPreferences.Editor prefsEditor = myPrefs.edit();
-//        prefsEditor.putString("buyernames", buyernames);
-//        prefsEditor.putString("buyeremails", buyeremails);
-//        prefsEditor.commit();
+        try {
+            Toast.makeText(getBaseContext(), "fetching buyer info", Toast.LENGTH_LONG).show();
 
-//        Intent intent = new Intent(this, BuyerHistory.class);
-//        intent.putExtra("buyers", buyer1);
-//        startActivity(intent);
+            String buyernames = book.getBuyerDetails().getName();
+            String buyeremails = book.getBuyerDetails().getEmail();
+            SharedPreferences.Editor prefsEditor = myPrefs.edit();
+            prefsEditor.putString("buyernames", buyernames);
+            prefsEditor.putString("buyeremails", buyeremails);
+            prefsEditor.commit();
+
+
+        Intent intent = new Intent(this, BuyerHistory.class);
+        //     intent.putExtra("buyers", buyer1);
+        startActivity(intent);
+        } catch (NullPointerException npe) {
+            Toast.makeText(getBaseContext(), "No buyer found for your book yet", Toast.LENGTH_LONG).show();
+
+            System.out.println("No buyer found");
+        }
+
     }
 }

@@ -12,15 +12,16 @@ import java.util.List;
 
 import scu.book.campus.com.campusbook.R;
 import scu.book.campus.com.campusbook.model.Books;
+import scu.book.campus.com.campusbook.model.BuyerList;
 
 /**
  * Created by Kawayipk on 5/25/16.
  */
-public class BuyerBookListAdapter extends ArrayAdapter<Books> {
-    private final List<Books> books;
+public class BuyerBookListAdapter extends ArrayAdapter<BuyerList> {
+    private final List<BuyerList> books;
     private Context ctxt;
 
-    public BuyerBookListAdapter(Context context, int resource, List<Books> books) {
+    public BuyerBookListAdapter(Context context, int resource, List<BuyerList> books) {
         super(context, resource, books);
         this.books = books;
         ctxt = context;

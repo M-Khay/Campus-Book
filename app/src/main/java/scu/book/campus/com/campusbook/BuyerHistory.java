@@ -1,5 +1,6 @@
 package scu.book.campus.com.campusbook;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -39,8 +40,12 @@ public class BuyerHistory extends AppCompatActivity implements AdapterView.OnIte
 
         Intent i = getIntent();
 //        buyers = (ArrayList<User>) savedInstanceState.getSerializable("buyers");
+        myPrefs = this.getSharedPreferences("myPrefs", Context.MODE_PRIVATE);
 
-        buyers = (ArrayList<User>) getIntent().getSerializableExtra("buyers");
+        String buyerName = myPrefs.getString("buyernames", "Ester");
+        String buyerEmail = myPrefs.getString("buyeremails", "Eclara@scu.edu");
+        User user = new User(buyerName, buyerEmail, "98237232");
+//        buyers = (ArrayList<User>) getIntent().getSerializableExtra("buyers");
 
 
         // for test OK
@@ -60,6 +65,7 @@ public class BuyerHistory extends AppCompatActivity implements AdapterView.OnIte
 //        Query query = myFirebaseRef.orderByChild("sellerEmail").equalTo("yliu4@scu.edu");
 //
 //        totalNumberOfUsers = users.size();
+        buyers.add(user);
 
         ListView lv = (ListView) findViewById(R.id.listView_buyer_user);
         lv.setAdapter(new BuyerUserListAdapter(this, R.layout.buyer_user_record_card, buyers));

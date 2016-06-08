@@ -19,6 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
@@ -35,6 +36,7 @@ import java.util.Map;
 import scu.book.campus.com.campusbook.Constants.SharedData;
 import scu.book.campus.com.campusbook.adapter.BuyerBookListAdapter;
 import scu.book.campus.com.campusbook.model.Books;
+import scu.book.campus.com.campusbook.model.BuyerList;
 import scu.book.campus.com.campusbook.model.User;
 
 /**
@@ -68,7 +70,7 @@ public class Buyer extends Fragment implements AdapterView.OnItemClickListener {
 
 
     Firebase myFirebaseRef;
-    List<Books> list;
+    List<BuyerList> list;
     BuyerBookListAdapter adapter;
     int totalNumberOfbooks = 0;
     SharedPreferences myPrefs;
@@ -107,7 +109,7 @@ public class Buyer extends Fragment implements AdapterView.OnItemClickListener {
         query.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                Books books = dataSnapshot.getValue(Books.class);
+                BuyerList books = dataSnapshot.getValue(BuyerList.class);
                 list.add(books);
                 adapter.notifyDataSetChanged();
             }
@@ -300,8 +302,8 @@ public class Buyer extends Fragment implements AdapterView.OnItemClickListener {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), MapsActivity.class);
                 intent.putExtra("location_name", bookObj.sellerLocation);
-                intent.putExtra("seller",bookObj.sellerName);
-                intent.putExtra("seller_email",bookObj.sellerEmail);
+                intent.putExtra("seller", bookObj.sellerName);
+                intent.putExtra("seller_email", bookObj.sellerEmail);
                 startActivity(intent);
             }
         });
@@ -384,9 +386,43 @@ public class Buyer extends Fragment implements AdapterView.OnItemClickListener {
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Books book = list.get(position);
+        BuyerList book = list.get(position);
+
+
+//        ArrayList<Object> buyers = (ArrayList<Object>) book.getBuyers();
+//        BuyerDetails buyer1 = new BuyerDetails("Kush", "book_buyer1@google.com");
+//        BuyerDetails buyer2 = new BuyerDetails("Luv", "book_buyer1@google.com");
+//        buyers.add(buyer1);
+//        buyers.add(buyer2);
+
+
+        // for test OK
+//        myPrefs = this.getSharedPreferences("buyerhistory", MODE_PRIVATE);
+//        String buyernames = "book1_buyer1,book1_buyer2";
+//        String buyeremails = "book1_buyer1@google.com,book1_buyer2@google.com";
+//
+        try {
+            Toast.makeText(getContext(), "fetching buyer info", Toast.LENGTH_LONG).show();
+
+            String buyernames = book.getBuyerDetails().getName();
+            String buyeremails = book.getBuyerDetails().getEmail();
+            SharedPreferences.Editor prefsEditor = myPrefs.edit();
+            prefsEditor.putString("buyernames", buyernames);
+            prefsEditor.putString("buyeremails", buyeremails);
+            prefsEditor.commit();
+
+
+            Intent intent = new Intent(getContext(), BuyerHistory.class);
+            //     intent.putExtra("buyers", buyer1);
+            startActivity(intent);
+        } catch (NullPointerException npe) {
+            Toast.makeText(getContext(), "No buyer found for your book yet", Toast.LENGTH_LONG).show();
+
+            System.out.println("No buyer found");
+        }
 
     }
-
 }
+
+
 
