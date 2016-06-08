@@ -156,11 +156,10 @@
 
         <ImageView
             android:layout_marginTop="10dp"
-            android:layout_width="wrap_content"
+            android:layout_width="100sp"
             android:layout_height="0dp"
             android:layout_gravity="center_horizontal"
             android:id="@+id/book_image_second_page"
-            android:background="@drawable/book_cover_1"
             android:layout_weight="0.40"/>
 
         <TextView

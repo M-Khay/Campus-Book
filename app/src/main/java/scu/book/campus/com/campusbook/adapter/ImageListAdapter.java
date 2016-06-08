@@ -120,13 +120,14 @@ try {
         holder.bookName.setText(book.getBookName());
         holder.bookPrice.setText(book.getBookPrice());
 
+
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inSampleSize = 8; // Experiment with different sizes
 
-//        byte[] decodedImage = Base64.decode(book.getBookImage(), Base64.DEFAULT);
-//        Bitmap decodedImageByte = BitmapFactory.decodeByteArray(decodedImage, 0, decodedImage.length);
-//
-//        holder.bookImage.setImageBitmap(decodedImageByte);
+        byte[] decodedImage = Base64.decode(book.getBookImage(), Base64.DEFAULT);
+        Bitmap decodedImageByte = BitmapFactory.decodeByteArray(decodedImage, 0, decodedImage.length);
+
+        holder.bookImage.setImageBitmap(decodedImageByte);
 
     }
 
