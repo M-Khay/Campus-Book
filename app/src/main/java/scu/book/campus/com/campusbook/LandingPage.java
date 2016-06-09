@@ -208,7 +208,7 @@ public class LandingPage extends AppCompatActivity implements GoogleApiClient.On
     @Override
     protected void onPause() {
         super.onPause();
-        finish();
+//        finish();
     }
 
     @Override
