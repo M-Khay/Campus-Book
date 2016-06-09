@@ -46,10 +46,7 @@ public class HomeActivity extends FragmentActivity {
                 });
 
 
-        boolean notification = getIntent().getBooleanExtra("notification", false);
-        if (notification) {
-            mViewPager.setCurrentItem(1);
-        }
+
 
     }
 }

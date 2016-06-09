@@ -363,6 +363,7 @@ public class Buyer extends Fragment implements AdapterView.OnItemClickListener {
         if (isVisibleToUser) {
             if (bookSelected == false) {
                 System.out.println("Changing the visinility");
+
                 page0.setVisibility(View.VISIBLE);
                 page1.setVisibility(View.GONE);
                 page2.setVisibility(View.GONE);
